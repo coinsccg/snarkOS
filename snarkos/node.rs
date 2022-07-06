@@ -58,6 +58,9 @@ pub struct Node {
     /// Specify this as a prover node, with the given prover address.
     #[clap(long, action)]
     pub prover: Option<String>,
+    /// Specify the number of GPUs
+    #[clap(long, action)]
+    pub gpu: Option<usize>,
     /// Specify the pool that a prover node is contributing to.
     #[clap(long, action)]
     pub pool: Option<SocketAddr>,
