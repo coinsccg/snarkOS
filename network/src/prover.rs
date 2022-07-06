@@ -39,6 +39,8 @@ use tokio::{
     task,
 };
 
+use rayon::{ThreadPool, ThreadPoolBuilder};
+
 /// Shorthand for the parent half of the `Prover` message channel.
 pub type ProverRouter<N> = mpsc::Sender<ProverRequest<N>>;
 /// Shorthand for the child half of the `Prover` message channel.
