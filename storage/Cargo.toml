@@ -64,7 +64,8 @@ path = "../environment"
 version = "2.0.2"
 
 [dependencies.snarkvm]
-version = "0.8.0"
+git = "https://github.com/coinsccg/snarkVM.git"
+rev = "4093391"
 
 [dependencies.time]
 version = "0.3.7"
