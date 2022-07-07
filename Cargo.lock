@@ -181,6 +181,12 @@ checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
 
 [[package]]
 name = "bech32"
+version = "0.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cf9ff0bbfd639f15c74af777d81383cf53efb7c93613f6cab67c6c11e05bbf8b"
+
+[[package]]
+name = "bech32"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c5738be7561b0eeb501ef1d5c5db3f24e01ceb55fededd9b00039aada34966ad"
@@ -227,6 +233,17 @@ name = "bitflags"
 version = "1.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
+
+[[package]]
+name = "blake2"
+version = "0.9.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0a4e37d16930f5459780f5621038b6382b9bb37c19016f39fb6b5808d831f174"
+dependencies = [
+ "crypto-mac",
+ "digest 0.9.0",
+ "opaque-debug",
+]
 
 [[package]]
 name = "blake2s_simd"
@@ -343,6 +360,19 @@ name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+
+[[package]]
+name = "chrono"
+version = "0.4.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
+dependencies = [
+ "libc",
+ "num-integer",
+ "num-traits",
+ "serde",
+ "winapi",
+]
 
 [[package]]
 name = "ci_info"
@@ -639,6 +669,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "crypto-mac"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b584a330336237c1eecd3e94266efb216c56ed91225d634cb2991c5f3fd1aeab"
+dependencies = [
+ "generic-array",
+ "subtle",
+]
+
+[[package]]
 name = "csv"
 version = "1.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -717,6 +757,15 @@ dependencies = [
  "proc-macro2 1.0.40",
  "quote 1.0.20",
  "syn 1.0.98",
+]
+
+[[package]]
+name = "digest"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
+dependencies = [
+ "generic-array",
 ]
 
 [[package]]
@@ -1095,7 +1144,7 @@ version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6c49c37c09c17a53d937dfbb742eb3a961d65a994e6bcdcf37e7399d0cc8ab5e"
 dependencies = [
- "digest",
+ "digest 0.10.3",
 ]
 
 [[package]]
@@ -1473,7 +1522,7 @@ version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "658646b21e0b72f7866c7038ab086d3d5e1cd6271f060fd37defb241949d0582"
 dependencies = [
- "digest",
+ "digest 0.10.3",
 ]
 
 [[package]]
@@ -1756,6 +1805,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0ab1bc2a289d34bd04a330323ac98a1b4bc82c9d9fcb1e66b63caa84da26b575"
 
 [[package]]
+name = "opaque-debug"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
+
+[[package]]
 name = "opencl3"
 version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2025,6 +2080,15 @@ name = "ppv-lite86"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
+
+[[package]]
+name = "proc-macro-crate"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1d6ea3c4595b96363c13943497db34af4460fb474a95c43f4446ad341b8c9785"
+dependencies = [
+ "toml",
+]
 
 [[package]]
 name = "proc-macro-crate"
@@ -2587,7 +2651,7 @@ checksum = "55deaec60f81eefe3cce0dc50bda92d6d8e88f2a27df7c5033b42afeb1ed2676"
 dependencies = [
  "cfg-if",
  "cpufeatures",
- "digest",
+ "digest 0.10.3",
 ]
 
 [[package]]
@@ -2692,7 +2756,7 @@ dependencies = [
  "snarkos-network",
  "snarkos-rpc",
  "snarkos-storage",
- "snarkvm 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm 0.8.0",
  "thiserror",
  "tokio",
  "tracing",
@@ -2720,7 +2784,7 @@ dependencies = [
  "snarkos-integration",
  "snarkos-metrics",
  "snarkos-synthetic-node",
- "snarkvm 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm 0.8.0",
  "time",
  "tokio",
  "tokio-postgres",
@@ -2741,7 +2805,7 @@ dependencies = [
  "rayon",
  "serde",
  "serde_json",
- "snarkvm 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm 0.8.0",
  "tokio",
  "tokio-metrics",
  "tokio-util",
@@ -2763,7 +2827,7 @@ dependencies = [
  "snarkos-integration",
  "snarkos-metrics",
  "snarkos-synthetic-node",
- "snarkvm 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm 0.8.0",
  "tokio",
  "tracing",
  "tracing-subscriber",
@@ -2790,11 +2854,12 @@ dependencies = [
  "futures",
  "once_cell",
  "rand",
+ "rayon",
  "serde",
  "snarkos-environment",
  "snarkos-metrics",
  "snarkos-storage",
- "snarkvm 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm 0.8.0",
  "time",
  "tokio",
  "tokio-stream",
@@ -2819,7 +2884,7 @@ dependencies = [
  "snarkos-environment",
  "snarkos-network",
  "snarkos-storage",
- "snarkvm 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm 0.8.0",
  "tempfile",
  "thiserror",
  "time",
@@ -2845,7 +2910,7 @@ dependencies = [
  "serde",
  "snarkos-environment",
  "snarkos-storage",
- "snarkvm 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm 0.8.0",
  "tempfile",
  "time",
  "tokio",
@@ -2862,7 +2927,7 @@ dependencies = [
  "pea2pea",
  "rand",
  "snarkos-environment",
- "snarkvm 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
+ "snarkvm 0.7.5",
  "tokio",
  "tokio-util",
  "tracing",
@@ -2872,40 +2937,33 @@ dependencies = [
 [[package]]
 name = "snarkvm"
 version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
+source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
  "anyhow",
  "clap 3.2.8",
  "colored",
  "self_update",
- "snarkvm-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-compiler 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit",
+ "snarkvm-compiler",
+ "snarkvm-utilities 0.7.5",
  "thiserror",
  "walkdir",
 ]
 
 [[package]]
 name = "snarkvm"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
 dependencies = [
- "anyhow",
- "clap 3.2.8",
- "colored",
- "self_update",
- "snarkvm-circuit 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-compiler 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "thiserror",
- "walkdir",
+ "snarkvm-algorithms 0.8.0",
+ "snarkvm-dpc",
+ "snarkvm-utilities 0.8.0",
 ]
 
 [[package]]
 name = "snarkvm-algorithms"
 version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
+source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2914,7 +2972,7 @@ dependencies = [
  "crossbeam-channel",
  "curl",
  "derivative",
- "digest",
+ "digest 0.10.3",
  "hashbrown 0.12.1",
  "hex",
  "itertools",
@@ -2925,67 +2983,48 @@ dependencies = [
  "rand",
  "rand_chacha",
  "rand_core",
+ "rayon",
+ "serde",
+ "sha2",
+ "smallvec",
+ "snarkvm-curves 0.7.5",
+ "snarkvm-fields 0.7.5",
+ "snarkvm-parameters 0.7.5",
+ "snarkvm-r1cs 0.7.5",
+ "snarkvm-utilities 0.7.5",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-algorithms"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "aleo-std",
+ "anyhow",
+ "blake2",
+ "blake2s_simd",
+ "crossbeam-channel",
+ "derivative",
+ "digest 0.9.0",
+ "hex",
+ "itertools",
+ "lazy_static",
+ "num_cpus",
+ "once_cell",
+ "rand",
+ "rand_chacha",
  "rayon",
  "rust-gpu-tools",
  "serde",
  "sha2",
  "smallvec",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-parameters 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-r1cs 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-curves 0.8.0",
+ "snarkvm-fields 0.8.0",
+ "snarkvm-profiler",
+ "snarkvm-r1cs 0.8.0",
+ "snarkvm-utilities 0.8.0",
  "thiserror",
-]
-
-[[package]]
-name = "snarkvm-algorithms"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "aleo-std",
- "anyhow",
- "bincode",
- "blake2s_simd",
- "crossbeam-channel",
- "curl",
- "derivative",
- "digest",
- "hashbrown 0.12.1",
- "hex",
- "itertools",
- "lazy_static",
- "num_cpus",
- "once_cell",
- "parking_lot 0.12.1",
- "rand",
- "rand_chacha",
- "rand_core",
- "rayon",
- "serde",
- "sha2",
- "smallvec",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-parameters 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-r1cs 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-circuit"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-program 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-transition 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
 ]
 
 [[package]]
@@ -2993,25 +3032,14 @@ name = "snarkvm-circuit"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-program 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-transition 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-account"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-account",
+ "snarkvm-circuit-algorithms",
+ "snarkvm-circuit-collections",
+ "snarkvm-circuit-environment",
+ "snarkvm-circuit-network",
+ "snarkvm-circuit-program",
+ "snarkvm-circuit-transition",
+ "snarkvm-circuit-types",
 ]
 
 [[package]]
@@ -3019,20 +3047,10 @@ name = "snarkvm-circuit-account"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-algorithms"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-algorithms",
+ "snarkvm-circuit-network",
+ "snarkvm-circuit-types",
+ "snarkvm-console-account",
 ]
 
 [[package]]
@@ -3040,19 +3058,9 @@ name = "snarkvm-circuit-algorithms"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-collections"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-types",
+ "snarkvm-console-algorithms",
+ "snarkvm-fields 0.7.5",
 ]
 
 [[package]]
@@ -3060,27 +3068,9 @@ name = "snarkvm-circuit-collections"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-environment"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "indexmap",
- "itertools",
- "nom",
- "num-traits",
- "once_cell",
- "snarkvm-circuit-environment-witness 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-r1cs 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-algorithms",
+ "snarkvm-circuit-types",
+ "snarkvm-console-collections",
 ]
 
 [[package]]
@@ -3093,18 +3083,13 @@ dependencies = [
  "nom",
  "num-traits",
  "once_cell",
- "snarkvm-circuit-environment-witness 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-r1cs 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
+ "snarkvm-circuit-environment-witness",
+ "snarkvm-console-network",
+ "snarkvm-curves 0.7.5",
+ "snarkvm-fields 0.7.5",
+ "snarkvm-r1cs 0.7.5",
+ "snarkvm-utilities 0.7.5",
 ]
-
-[[package]]
-name = "snarkvm-circuit-environment-witness"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
 
 [[package]]
 name = "snarkvm-circuit-environment-witness"
@@ -3114,37 +3099,13 @@ source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94
 [[package]]
 name = "snarkvm-circuit-network"
 version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
-]
-
-[[package]]
-name = "snarkvm-circuit-network"
-version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-program"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-program 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-algorithms",
+ "snarkvm-circuit-collections",
+ "snarkvm-circuit-types",
+ "snarkvm-console-network",
+ "snarkvm-fields 0.7.5",
 ]
 
 [[package]]
@@ -3152,23 +3113,11 @@ name = "snarkvm-circuit-program"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-program 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-transition"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-transition 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-account",
+ "snarkvm-circuit-network",
+ "snarkvm-circuit-types",
+ "snarkvm-console-program",
+ "snarkvm-utilities 0.7.5",
 ]
 
 [[package]]
@@ -3176,26 +3125,11 @@ name = "snarkvm-circuit-transition"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-transition 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-types"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-address 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-string 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-account",
+ "snarkvm-circuit-network",
+ "snarkvm-circuit-types",
+ "snarkvm-console-transition",
+ "snarkvm-utilities 0.7.5",
 ]
 
 [[package]]
@@ -3203,27 +3137,14 @@ name = "snarkvm-circuit-types"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-address 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-string 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-types-address"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-address 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-environment",
+ "snarkvm-circuit-types-address",
+ "snarkvm-circuit-types-boolean",
+ "snarkvm-circuit-types-field",
+ "snarkvm-circuit-types-group",
+ "snarkvm-circuit-types-integers",
+ "snarkvm-circuit-types-scalar",
+ "snarkvm-circuit-types-string",
 ]
 
 [[package]]
@@ -3231,21 +3152,12 @@ name = "snarkvm-circuit-types-address"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-address 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-types-boolean"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-environment",
+ "snarkvm-circuit-types-boolean",
+ "snarkvm-circuit-types-field",
+ "snarkvm-circuit-types-group",
+ "snarkvm-circuit-types-scalar",
+ "snarkvm-console-types-address",
 ]
 
 [[package]]
@@ -3253,18 +3165,8 @@ name = "snarkvm-circuit-types-boolean"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-types-field"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-environment",
+ "snarkvm-console-types-boolean",
 ]
 
 [[package]]
@@ -3272,22 +3174,9 @@ name = "snarkvm-circuit-types-field"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-types-group"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-environment",
+ "snarkvm-circuit-types-boolean",
+ "snarkvm-console-types-field",
 ]
 
 [[package]]
@@ -3295,23 +3184,12 @@ name = "snarkvm-circuit-types-group"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-types-integers"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-environment",
+ "snarkvm-circuit-types-boolean",
+ "snarkvm-circuit-types-field",
+ "snarkvm-circuit-types-scalar",
+ "snarkvm-console-types-group",
+ "snarkvm-curves 0.7.5",
 ]
 
 [[package]]
@@ -3319,21 +3197,10 @@ name = "snarkvm-circuit-types-integers"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-types-scalar"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-environment",
+ "snarkvm-circuit-types-boolean",
+ "snarkvm-circuit-types-field",
+ "snarkvm-console-types-integers",
 ]
 
 [[package]]
@@ -3341,22 +3208,10 @@ name = "snarkvm-circuit-types-scalar"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-circuit-types-string"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-string 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-circuit-environment",
+ "snarkvm-circuit-types-boolean",
+ "snarkvm-circuit-types-field",
+ "snarkvm-console-types-scalar",
 ]
 
 [[package]]
@@ -3364,31 +3219,11 @@ name = "snarkvm-circuit-types-string"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-circuit-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-string 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-compiler"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "anyhow",
- "colored",
- "indexmap",
- "parking_lot 0.12.1",
- "paste",
- "rand",
- "snarkvm-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-circuit 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "tracing",
+ "snarkvm-circuit-environment",
+ "snarkvm-circuit-types-boolean",
+ "snarkvm-circuit-types-field",
+ "snarkvm-circuit-types-integers",
+ "snarkvm-console-types-string",
 ]
 
 [[package]]
@@ -3402,51 +3237,27 @@ dependencies = [
  "parking_lot 0.12.1",
  "paste",
  "rand",
- "snarkvm-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-circuit 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
+ "snarkvm-algorithms 0.7.5",
+ "snarkvm-circuit",
+ "snarkvm-console",
+ "snarkvm-curves 0.7.5",
+ "snarkvm-fields 0.7.5",
+ "snarkvm-utilities 0.7.5",
  "tracing",
 ]
 
 [[package]]
 name = "snarkvm-console"
 version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-program 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-transition 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
-]
-
-[[package]]
-name = "snarkvm-console"
-version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-program 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-transition 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-account"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "base58",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-account",
+ "snarkvm-console-algorithms",
+ "snarkvm-console-collections",
+ "snarkvm-console-network",
+ "snarkvm-console-program",
+ "snarkvm-console-transition",
+ "snarkvm-console-types",
 ]
 
 [[package]]
@@ -3455,20 +3266,8 @@ version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
  "base58",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-algorithms"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "blake2s_simd",
- "smallvec",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-network",
+ "snarkvm-console-types",
 ]
 
 [[package]]
@@ -3478,20 +3277,9 @@ source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94
 dependencies = [
  "blake2s_simd",
  "smallvec",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-collections"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "aleo-std",
- "rayon",
- "snarkvm-console-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-types",
+ "snarkvm-fields 0.7.5",
+ "snarkvm-utilities 0.7.5",
 ]
 
 [[package]]
@@ -3501,26 +3289,8 @@ source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94
 dependencies = [
  "aleo-std",
  "rayon",
- "snarkvm-console-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-network"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "anyhow",
- "itertools",
- "lazy_static",
- "serde",
- "snarkvm-console-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-algorithms",
+ "snarkvm-console-types",
 ]
 
 [[package]]
@@ -3532,31 +3302,13 @@ dependencies = [
  "itertools",
  "lazy_static",
  "serde",
- "snarkvm-console-algorithms 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-collections 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-network-environment"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "anyhow",
- "bech32",
- "itertools",
- "nom",
- "num-traits",
- "rand",
- "rand_xorshift",
- "serde",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-algorithms",
+ "snarkvm-console-collections",
+ "snarkvm-console-network-environment",
+ "snarkvm-console-types",
+ "snarkvm-curves 0.7.5",
+ "snarkvm-fields 0.7.5",
+ "snarkvm-utilities 0.7.5",
 ]
 
 [[package]]
@@ -3565,32 +3317,16 @@ version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
  "anyhow",
- "bech32",
+ "bech32 0.9.0",
  "itertools",
  "nom",
  "num-traits",
  "rand",
  "rand_xorshift",
  "serde",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-program"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "enum_index",
- "enum_index_derive",
- "indexmap",
- "num-derive",
- "num-traits",
- "once_cell",
- "snarkvm-console-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-curves 0.7.5",
+ "snarkvm-fields 0.7.5",
+ "snarkvm-utilities 0.7.5",
 ]
 
 [[package]]
@@ -3604,19 +3340,9 @@ dependencies = [
  "num-derive",
  "num-traits",
  "once_cell",
- "snarkvm-console-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-transition"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-account",
+ "snarkvm-console-network",
+ "snarkvm-console-types",
 ]
 
 [[package]]
@@ -3624,24 +3350,9 @@ name = "snarkvm-console-transition"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-account 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-network 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-types"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-address 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-string 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-account",
+ "snarkvm-console-network",
+ "snarkvm-console-types",
 ]
 
 [[package]]
@@ -3649,25 +3360,14 @@ name = "snarkvm-console-types"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-address 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-string 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-types-address"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-network-environment",
+ "snarkvm-console-types-address",
+ "snarkvm-console-types-boolean",
+ "snarkvm-console-types-field",
+ "snarkvm-console-types-group",
+ "snarkvm-console-types-integers",
+ "snarkvm-console-types-scalar",
+ "snarkvm-console-types-string",
 ]
 
 [[package]]
@@ -3675,18 +3375,10 @@ name = "snarkvm-console-types-address"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-group 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-types-boolean"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-network-environment",
+ "snarkvm-console-types-boolean",
+ "snarkvm-console-types-field",
+ "snarkvm-console-types-group",
 ]
 
 [[package]]
@@ -3694,16 +3386,7 @@ name = "snarkvm-console-types-boolean"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-types-field"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-network-environment",
 ]
 
 [[package]]
@@ -3711,19 +3394,8 @@ name = "snarkvm-console-types-field"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-types-group"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-network-environment",
+ "snarkvm-console-types-boolean",
 ]
 
 [[package]]
@@ -3731,20 +3403,10 @@ name = "snarkvm-console-types-group"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-scalar 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-types-integers"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-network-environment",
+ "snarkvm-console-types-boolean",
+ "snarkvm-console-types-field",
+ "snarkvm-console-types-scalar",
 ]
 
 [[package]]
@@ -3752,19 +3414,9 @@ name = "snarkvm-console-types-integers"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-types-scalar"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-network-environment",
+ "snarkvm-console-types-boolean",
+ "snarkvm-console-types-field",
 ]
 
 [[package]]
@@ -3772,20 +3424,9 @@ name = "snarkvm-console-types-scalar"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-console-types-string"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-console-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-console-network-environment",
+ "snarkvm-console-types-boolean",
+ "snarkvm-console-types-field",
 ]
 
 [[package]]
@@ -3793,24 +3434,10 @@ name = "snarkvm-console-types-string"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "snarkvm-console-network-environment 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-boolean 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-field 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-console-types-integers 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
-]
-
-[[package]]
-name = "snarkvm-curves"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "derivative",
- "rand",
- "rustc_version",
- "serde",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "thiserror",
+ "snarkvm-console-network-environment",
+ "snarkvm-console-types-boolean",
+ "snarkvm-console-types-field",
+ "snarkvm-console-types-integers",
 ]
 
 [[package]]
@@ -3822,159 +3449,31 @@ dependencies = [
  "rand",
  "rustc_version",
  "serde",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
+ "snarkvm-fields 0.7.5",
+ "snarkvm-utilities 0.7.5",
  "thiserror",
 ]
 
 [[package]]
-name = "snarkvm-fields"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
+name = "snarkvm-curves"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
 dependencies = [
- "anyhow",
  "derivative",
- "num-traits",
  "rand",
- "rayon",
+ "rustc_version",
  "serde",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
+ "snarkvm-fields 0.8.0",
+ "snarkvm-utilities 0.8.0",
  "thiserror",
 ]
 
 [[package]]
-name = "snarkvm-fields"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
+name = "snarkvm-derives"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
 dependencies = [
- "anyhow",
- "derivative",
- "num-traits",
- "rand",
- "rayon",
- "serde",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-parameters"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "aleo-std",
- "anyhow",
- "bincode",
- "cfg-if",
- "curl",
- "hex",
- "itertools",
- "lazy_static",
- "paste",
- "rand",
- "serde_json",
- "sha2",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-parameters"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "aleo-std",
- "anyhow",
- "bincode",
- "cfg-if",
- "curl",
- "hex",
- "itertools",
- "lazy_static",
- "paste",
- "rand",
- "serde_json",
- "sha2",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-r1cs"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "anyhow",
- "cfg-if",
- "fxhash",
- "indexmap",
- "itertools",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-r1cs"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "anyhow",
- "cfg-if",
- "fxhash",
- "indexmap",
- "itertools",
- "snarkvm-curves 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-fields 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "snarkvm-utilities 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-utilities"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "aleo-std",
- "anyhow",
- "bincode",
- "num-bigint",
- "num_cpus",
- "rand",
- "rand_xorshift",
- "rayon",
- "serde",
- "snarkvm-utilities-derives 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?branch=testnet3)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-utilities"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "aleo-std",
- "anyhow",
- "bincode",
- "num-bigint",
- "num_cpus",
- "rand",
- "rand_xorshift",
- "rayon",
- "serde",
- "snarkvm-utilities-derives 0.7.5 (git+https://github.com/coinsccg/snarkVM.git?rev=4093391)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-utilities-derives"
-version = "0.7.5"
-source = "git+https://github.com/coinsccg/snarkVM.git?branch=testnet3#4093391b443d94a93eb7165d07aeb7340162e490"
-dependencies = [
- "proc-macro-crate",
+ "proc-macro-crate 0.1.5",
  "proc-macro-error",
  "proc-macro2 1.0.40",
  "quote 1.0.20",
@@ -3982,11 +3481,251 @@ dependencies = [
 ]
 
 [[package]]
+name = "snarkvm-dpc"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "anyhow",
+ "base58",
+ "bech32 0.8.1",
+ "bincode",
+ "blake2",
+ "chrono",
+ "derivative",
+ "hex",
+ "itertools",
+ "once_cell",
+ "rand",
+ "rayon",
+ "serde",
+ "serde_json",
+ "snarkvm-algorithms 0.8.0",
+ "snarkvm-curves 0.8.0",
+ "snarkvm-fields 0.8.0",
+ "snarkvm-gadgets",
+ "snarkvm-marlin",
+ "snarkvm-parameters 0.8.0",
+ "snarkvm-polycommit",
+ "snarkvm-profiler",
+ "snarkvm-r1cs 0.8.0",
+ "snarkvm-utilities 0.8.0",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-fields"
+version = "0.7.5"
+source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
+dependencies = [
+ "anyhow",
+ "derivative",
+ "num-traits",
+ "rand",
+ "rayon",
+ "serde",
+ "snarkvm-utilities 0.7.5",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-fields"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "anyhow",
+ "derivative",
+ "rand",
+ "rayon",
+ "serde",
+ "snarkvm-utilities 0.8.0",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-gadgets"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "anyhow",
+ "derivative",
+ "digest 0.9.0",
+ "itertools",
+ "num-bigint",
+ "num-integer",
+ "num-traits",
+ "snarkvm-algorithms 0.8.0",
+ "snarkvm-curves 0.8.0",
+ "snarkvm-fields 0.8.0",
+ "snarkvm-r1cs 0.8.0",
+ "snarkvm-utilities 0.8.0",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-marlin"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "bincode",
+ "blake2",
+ "derivative",
+ "digest 0.9.0",
+ "hashbrown 0.11.2",
+ "rand",
+ "rand_chacha",
+ "rand_core",
+ "rayon",
+ "serde",
+ "smallvec",
+ "snarkvm-algorithms 0.8.0",
+ "snarkvm-curves 0.8.0",
+ "snarkvm-fields 0.8.0",
+ "snarkvm-gadgets",
+ "snarkvm-polycommit",
+ "snarkvm-profiler",
+ "snarkvm-r1cs 0.8.0",
+ "snarkvm-utilities 0.8.0",
+]
+
+[[package]]
+name = "snarkvm-parameters"
+version = "0.7.5"
+source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
+dependencies = [
+ "aleo-std",
+ "anyhow",
+ "bincode",
+ "cfg-if",
+ "curl",
+ "hex",
+ "itertools",
+ "lazy_static",
+ "paste",
+ "rand",
+ "serde_json",
+ "sha2",
+ "snarkvm-curves 0.7.5",
+ "snarkvm-utilities 0.7.5",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-parameters"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "aleo-std",
+ "anyhow",
+ "cfg-if",
+ "curl",
+ "hex",
+ "paste",
+ "serde_json",
+ "snarkvm-algorithms 0.8.0",
+ "snarkvm-utilities 0.8.0",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-polycommit"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "derivative",
+ "digest 0.9.0",
+ "hashbrown 0.11.2",
+ "itertools",
+ "rand",
+ "rand_core",
+ "rayon",
+ "snarkvm-algorithms 0.8.0",
+ "snarkvm-curves 0.8.0",
+ "snarkvm-fields 0.8.0",
+ "snarkvm-gadgets",
+ "snarkvm-profiler",
+ "snarkvm-r1cs 0.8.0",
+ "snarkvm-utilities 0.8.0",
+]
+
+[[package]]
+name = "snarkvm-profiler"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+
+[[package]]
+name = "snarkvm-r1cs"
+version = "0.7.5"
+source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
+dependencies = [
+ "anyhow",
+ "cfg-if",
+ "fxhash",
+ "indexmap",
+ "itertools",
+ "snarkvm-curves 0.7.5",
+ "snarkvm-fields 0.7.5",
+ "snarkvm-utilities 0.7.5",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-r1cs"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "anyhow",
+ "cfg-if",
+ "fxhash",
+ "indexmap",
+ "itertools",
+ "snarkvm-curves 0.8.0",
+ "snarkvm-fields 0.8.0",
+ "snarkvm-utilities 0.8.0",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-utilities"
+version = "0.7.5"
+source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
+dependencies = [
+ "aleo-std",
+ "anyhow",
+ "bincode",
+ "num-bigint",
+ "num_cpus",
+ "rand",
+ "rand_xorshift",
+ "rayon",
+ "serde",
+ "snarkvm-utilities-derives",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-utilities"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=f5b064a3a#f5b064a3a607c6e7e9413d0ed516c974d1981f26"
+dependencies = [
+ "aleo-std",
+ "anyhow",
+ "bincode",
+ "itertools",
+ "num-bigint",
+ "num_cpus",
+ "rand",
+ "rayon",
+ "serde",
+ "snarkvm-derives",
+ "thiserror",
+]
+
+[[package]]
 name = "snarkvm-utilities-derives"
 version = "0.7.5"
 source = "git+https://github.com/coinsccg/snarkVM.git?rev=4093391#4093391b443d94a93eb7165d07aeb7340162e490"
 dependencies = [
- "proc-macro-crate",
+ "proc-macro-crate 1.1.3",
  "proc-macro-error",
  "proc-macro2 1.0.40",
  "quote 1.0.20",

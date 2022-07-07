@@ -90,8 +90,8 @@ path = "./storage"
 version = "2.0.2"
 
 [dependencies.snarkvm]
-git = "https://github.com/coinsccg/snarkVM.git"
-branch = "testnet3"
+git = "https://github.com/coinsccg/snarkvm"
+rev = "f5b064a3a"
 
 [dependencies.clap]
 version = "3.2"

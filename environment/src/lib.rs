@@ -25,7 +25,6 @@ pub mod network;
 
 use crate::helpers::{NodeType, RawStatus, Resources};
 use snarkvm::dpc::Network;
-
 use once_cell::sync::OnceCell;
 use rayon::{ThreadPool, ThreadPoolBuilder};
 use std::{

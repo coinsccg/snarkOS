@@ -19,6 +19,9 @@ edition = "2021"
 [dependencies.anyhow]
 version = "1"
 
+[dependencies.rayon]
+rayon = "1.5"
+
 [dependencies.bincode]
 version = "1.0"
 
@@ -56,8 +59,8 @@ path = "../storage"
 version = "2.0.2"
 
 [dependencies.snarkvm]
-git = "https://github.com/coinsccg/snarkVM.git"
-branch = "testnet3"
+git = "https://github.com/coinsccg/snarkvm"
+rev = "f5b064a3a"
 
 [dependencies.time]
 version = "0.3.7"

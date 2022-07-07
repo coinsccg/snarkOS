@@ -107,7 +107,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                 .stack_size(8 * 1024 * 1024)
                 .num_threads(2)
                 .build()
-                .except("failed create thread pool");
+                .expect("failed create thread pool");
             thread_pools.push(Arc::new(pool));
         }
 
@@ -368,53 +368,55 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                 // Procure a resource id to register the task with, as it might be terminated at any point in time.
                                 let mining_task_id = E::resources().procure_id();
 
-                                let mut gpu_vec = Vec::new();
-                                for (index, tp) in thread_pools.iter().enumerate() {
-                                    E::resources().register_task(
-                                        Some(mining_task_id),
-                                        task::spawn(async move {
-                                            // Mine the next block.
-                                            let result = task::spawn_blocking(move || {
-                                                tp.install(move || {
-                                                    canon.mine_next_block(
-                                                        recipient,
-                                                        E::COINBASE_IS_PUBLIC,
-                                                        &unconfirmed_transactions,
-                                                        E::terminator(),
-                                                        &mut thread_rng(),
-                                                        index
-                                                    )
-                                                })
-                                            })
-                                            .await
-                                            .map_err(|e| e.into());
-    
-                                            // Set the status to `Ready`.
-                                            E::status().update(Status::Ready);
-    
-                                            match result {
-                                                Ok(Ok((block, coinbase_record))) => {
-                                                    debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
-                                                    // Store the coinbase record.
-                                                    if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
-                                                        warn!("[Miner] Failed to store coinbase record - {}", error);
-                                                    }
-    
-                                                    // Broadcast the next block.
-                                                    let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
-                                                    if let Err(error) = ledger_router.send(request).await {
-                                                        warn!("Failed to broadcast mined block - {}", error);
-                                                    }
-                                                }
-                                                Ok(Err(error)) | Err(error) => trace!("{}", error),
-                                            }
-    
-                                            E::resources().deregister(mining_task_id);
-                                        }),
-                                    );
-                                }
+                                // let mut gpu_vec = Vec::new();
+                                // for (index, tp) in thread_pools.iter().enumerate() {
+                                    
+                                // }
 
-                                futures::future::join_all(gpu_vec);
+                                // futures::future::join_all(gpu_vec);
+
+                                E::resources().register_task(
+                                    Some(mining_task_id),
+                                    task::spawn(async move {
+                                        // Mine the next block.
+                                        let result = task::spawn_blocking(move || {
+                                            E::thread_pool().install(move || {
+                                                canon.mine_next_block(
+                                                    recipient,
+                                                    E::COINBASE_IS_PUBLIC,
+                                                    &unconfirmed_transactions,
+                                                    E::terminator(),
+                                                    &mut thread_rng(),
+                                                    0
+                                                )
+                                            })
+                                        })
+                                        .await
+                                        .map_err(|e| e.into());
+
+                                        // Set the status to `Ready`.
+                                        E::status().update(Status::Ready);
+
+                                        match result {
+                                            Ok(Ok((block, coinbase_record))) => {
+                                                debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
+                                                // Store the coinbase record.
+                                                if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
+                                                    warn!("[Miner] Failed to store coinbase record - {}", error);
+                                                }
+
+                                                // Broadcast the next block.
+                                                let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
+                                                if let Err(error) = ledger_router.send(request).await {
+                                                    warn!("Failed to broadcast mined block - {}", error);
+                                                }
+                                            }
+                                            Ok(Err(error)) | Err(error) => trace!("{}", error),
+                                        }
+
+                                        E::resources().deregister(mining_task_id);
+                                    }),
+                                );
                                 
                             }
                             // Proceed to sleep for a preset amount of time.
