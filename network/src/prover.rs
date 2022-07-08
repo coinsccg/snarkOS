@@ -358,18 +358,18 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
                                 // Set the status to `Mining`.
                                 E::status().update(Status::Mining);
-
-                                // Prepare the unconfirmed transactions and dependent objects.
-                                let prover_state = prover_state.clone();
-                                let canon = state.ledger().reader().clone(); // This is *safe* as the ledger only reads.
-                                let unconfirmed_transactions = state.prover().memory_pool.read().await.transactions();
-                                let ledger_router = state.ledger().router().clone();
-
-                                // Procure a resource id to register the task with, as it might be terminated at any point in time.
-                                let mining_task_id = E::resources().procure_id();
-
+                                
                                 // let mut gpu_vec = Vec::new();
                                 for (index, tp) in thread_pools.iter().enumerate() {
+                                    // Prepare the unconfirmed transactions and dependent objects.
+                                    let prover_state = prover_state.clone();
+                                    let canon = state.ledger().reader().clone(); // This is *safe* as the ledger only reads.
+                                    let unconfirmed_transactions = state.prover().memory_pool.read().await.transactions();
+                                    let ledger_router = state.ledger().router().clone();
+
+                                    // Procure a resource id to register the task with, as it might be terminated at any point in time.
+                                    let mining_task_id = E::resources().procure_id();
+
                                     task::spawn(async move {
                                         E::resources().register_task(
                                             Some(mining_task_id),
