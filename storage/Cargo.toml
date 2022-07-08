@@ -65,7 +65,7 @@ version = "2.0.2"
 
 [dependencies.snarkvm]
 git = "https://github.com/coinsccg/snarkvm"
-rev = "f5b064a3a"
+rev = "065d89284"
 
 [dependencies.time]
 version = "0.3.7"
