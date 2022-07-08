@@ -131,7 +131,8 @@ pub trait Environment: 'static + Clone + Debug + Default + Send + Sync {
         POOL.get_or_init(|| {
             Arc::new(ThreadPoolBuilder::new()
                 .stack_size(8 * 1024 * 1024)
-                .num_threads((num_cpus::get() * 7 / 8).max(2))
+                // .num_threads((num_cpus::get() * 7 / 8).max(2))
+                .num_threads(6)
                 .build()
                 .expect("Failed to initialize a thread pool for the node"))
         })
