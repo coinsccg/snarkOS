@@ -413,7 +413,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                                 E::resources().deregister(mining_task_id);
                                             }),
                                         );
-                                    })
+                                    });
                                 }
 
                                 // futures::future::join_all(gpu_vec);
