@@ -44,7 +44,7 @@ version = "1"
 
 [dependencies.snarkvm]
 git = "https://github.com/coinsccg/snarkvm"
-rev = "065d89284"
+rev = "c1abe9e09"
 
 [dependencies.tokio]
 version = "1"
