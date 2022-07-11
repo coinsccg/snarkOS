@@ -601,7 +601,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
                     }
                 }
             }
-            None => warn!("Attempted to send to a non-connected peer {}", peer),
+            None => {},
         }
     }
 

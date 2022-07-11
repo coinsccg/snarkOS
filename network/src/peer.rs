@@ -450,7 +450,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                             let rtt_start = Instant::now();
 
                             // Process the message.
-                            trace!("Received '{}' from {}", message.name(), peer_ip);
+                            // trace!("Received '{}' from {}", message.name(), peer_ip);
                             match message {
                                 Message::BlockRequest(start_block_height, end_block_height) => {
                                     #[cfg(any(feature = "test", feature = "prometheus"))]

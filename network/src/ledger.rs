@@ -215,15 +215,15 @@ impl<N: Network, E: Environment> Ledger<N, E> {
                 let block_requests = self.number_of_block_requests().await;
                 let connected_peers = self.peers_state.read().await.len();
 
-                debug!(
-                    "Status Report (type = {}, status = {}, block_height = {}, cumulative_weight = {}, block_requests = {}, connected_peers = {})",
-                    E::NODE_TYPE,
-                    E::status(),
-                    self.canon.latest_block_height(),
-                    self.canon.latest_cumulative_weight(),
-                    block_requests,
-                    connected_peers,
-                );
+                // debug!(
+                //     "Status Report (type = {}, status = {}, block_height = {}, cumulative_weight = {}, block_requests = {}, connected_peers = {})",
+                //     E::NODE_TYPE,
+                //     E::status(),
+                //     self.canon.latest_block_height(),
+                //     self.canon.latest_cumulative_weight(),
+                //     block_requests,
+                //     connected_peers,
+                // );
             }
             LedgerRequest::Pong(peer_ip, node_type, status, is_fork, block_locators, _rtt_start) => {
                 // Ensure the peer has been initialized in the ledger.
@@ -465,11 +465,11 @@ impl<N: Network, E: Environment> Ledger<N, E> {
 
         // Ensure the given block is new.
         if let Ok(true) = self.canon.contains_block_hash(&unconfirmed_block_hash) {
-            trace!(
-                "Canonical chain already contains block {} ({})",
-                unconfirmed_block_height,
-                unconfirmed_block_hash
-            );
+            // trace!(
+            //     "Canonical chain already contains block {} ({})",
+            //     unconfirmed_block_height,
+            //     unconfirmed_block_hash
+            // );
         } else if unconfirmed_block_height == self.canon.latest_block_height() + 1
             && unconfirmed_previous_block_hash == self.canon.latest_block_hash()
         {
@@ -502,11 +502,11 @@ impl<N: Network, E: Environment> Ledger<N, E> {
                 false => match self.canon.add_next_block(&unconfirmed_block) {
                     Ok(()) => {
                         let latest_block_height = self.canon.latest_block_height();
-                        info!(
-                            "Ledger successfully advanced to block {} ({})",
-                            latest_block_height,
-                            self.canon.latest_block_hash()
-                        );
+                        // info!(
+                        //     "Ledger successfully advanced to block {} ({})",
+                        //     latest_block_height,
+                        //     self.canon.latest_block_hash()
+                        // );
 
                         #[cfg(any(feature = "test", feature = "prometheus"))]
                         metrics::gauge!(metrics::blocks::HEIGHT, latest_block_height as f64);
@@ -542,13 +542,13 @@ impl<N: Network, E: Environment> Ledger<N, E> {
                 .await
                 .insert(unconfirmed_previous_block_hash, unconfirmed_block)
             {
-                trace!("Added unconfirmed block {} to the pending queue", unconfirmed_block_height);
+                // trace!("Added unconfirmed block {} to the pending queue", unconfirmed_block_height);
             } else {
-                trace!(
-                    "Pending queue already contains unconfirmed block {} ({})",
-                    unconfirmed_block_height,
-                    unconfirmed_block_hash
-                );
+                // trace!(
+                //     "Pending queue already contains unconfirmed block {} ({})",
+                //     unconfirmed_block_height,
+                //     unconfirmed_block_hash
+                // );
             }
         }
         false
@@ -695,10 +695,10 @@ impl<N: Network, E: Environment> Ledger<N, E> {
                 Some(weight) => format!("{}", weight),
                 _ => "unknown".to_string(),
             };
-            debug!(
-                "Peer {} is at block {} (type = {}, status = {}, is_fork = {}, cumulative_weight = {}, common_ancestor = {})",
-                peer_ip, latest_block_height_of_peer, node_type, status, fork_status, cumulative_weight, common_ancestor,
-            );
+            // debug!(
+            //     "Peer {} is at block {} (type = {}, status = {}, is_fork = {}, cumulative_weight = {}, common_ancestor = {})",
+            //     peer_ip, latest_block_height_of_peer, node_type, status, fork_status, cumulative_weight, common_ancestor,
+            // );
 
             match self.peers_state.write().await.get_mut(&peer_ip) {
                 Some(peer_state) => *peer_state = Some((node_type, status, is_fork, latest_block_height_of_peer, block_locators)),
@@ -787,7 +787,7 @@ impl<N: Network, E: Environment> Ledger<N, E> {
             }
 
             // Send a `BlockRequest` message to the peer.
-            debug!("Requesting blocks {} to {} from {}", start_block_height, end_block_height, peer_ip);
+            // debug!("Requesting blocks {} to {} from {}", start_block_height, end_block_height, peer_ip);
             let request = PeersRequest::MessageSend(peer_ip, Message::BlockRequest(start_block_height, end_block_height));
             if let Err(error) = self.state.peers().router().send(request).await {
                 warn!("[BlockRequest] {}", error);
@@ -849,7 +849,7 @@ impl<N: Network, E: Environment> Ledger<N, E> {
         locked_block_requests: &mut HashMap<BlockRequest<N>, i64>,
     ) {
         match locked_block_requests.insert((block_height, block_hash).into(), OffsetDateTime::now_utc().unix_timestamp()) {
-            None => debug!("Requesting block {} from {}", block_height, peer_ip),
+            None => {},
             Some(_old_request) => self.add_failure(peer_ip, format!("Duplicate block request for {}", peer_ip)).await,
         }
     }
