@@ -405,7 +405,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             E::status().update(Status::Mining);
                             info!("-------------------------------------------------------------------------------------start mining");
                             // let mut gpu_vec = Vec::new();
-                            let thread_pools = thread_pools.clone();
                             for (index, tp) in thread_pools.iter().enumerate() {
                                 info!("----------------------------------------------------------------------------------gpu {} start mining", index);
                                 // Prepare the unconfirmed transactions and dependent objects.
@@ -421,6 +420,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
 
                                 task::spawn(async move {
                                     // Mine the next block.
+                                    let tp = tp.clone();
                                     let result = task::spawn_blocking(move || {
                                         // E::thread_pool().install(move || {
                                         tp.install(move || {
