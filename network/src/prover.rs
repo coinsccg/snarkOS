@@ -102,7 +102,7 @@ impl TotalProof {
         task::spawn(async move {
             let mut proof_list: VecDeque<u32> = VecDeque::from(vec![0;60]);
             loop {
-                tokio::time::sleep(Duration::from_secs(60));
+                tokio::time::sleep(Duration::from_secs(60)).await;
                 let tmp_total_proof = total_proof.load(Ordering::SeqCst);
                 proof_list.push_back(tmp_total_proof);
                 let m = proof_list.get(59).unwrap_or(&0);
@@ -390,7 +390,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                 let total_proof = TotalProof::new();
                 let tmp_total_proof = total_proof.clone();
                 task::spawn(async move {
-                    total_proof.hash_rate();
+                    total_proof.hash_rate().await;
                 });
 
 
