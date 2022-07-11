@@ -403,6 +403,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                         loop {
                             // If `terminator` is `false` and the status is not `Peering` or `Mining` already, mine the next block.
                             info!("----------------------------------------------------------------------------------99999");
+                            info!("-------------------------------------------------------------------------------------threadpool:{}", thread_pools.len());
                             if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
                                 // Set the status to `Mining`.
                                 E::status().update(Status::Mining);
