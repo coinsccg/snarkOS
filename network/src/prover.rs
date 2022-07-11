@@ -140,7 +140,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
     pub async fn initialize_miner(&self, gpu: Option<usize>) {
         // Initialize the miner, if the node type is a miner.
         let mut thread_pools: Vec<Arc<ThreadPool>> = Vec::new();
-        let mut tmp_thread_pools: Arc<Vev<Arc<ThreadPool>>>;
+        let mut tmp_thread_pools: Arc<Vec<Arc<ThreadPool>>>;
         for _ in 0..gpu.unwrap() {
             let pool = ThreadPoolBuilder::new()
                 .stack_size(8 * 1024 * 1024)
@@ -399,6 +399,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                     // Notify the outer function that the task is ready.
                     let _ = router.send(());
                     let thread_pools = thread_pools.clone();
+                    let len = thread_pools.len();
                     loop {
                         // If `terminator` is `false` and the status is not `Peering` or `Mining` already, mine the next block.
                         if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
@@ -406,7 +407,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             E::status().update(Status::Mining);
                             info!("-------------------------------------------------------------------------------------start mining");
                             let thread_pools = thread_pools.clone();
-                            for (index, tp) in thread_pools.iter().enumerate() {
+                            for index in 0..len {
                                 info!("----------------------------------------------------------------------------------gpu {} start mining", index);
                                 // Prepare the unconfirmed transactions and dependent objects.
                                 let prover_state = prover_state.clone();
@@ -418,6 +419,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                 let mining_task_id = E::resources().procure_id();
 
                                 let tmp_total_proof = tmp_total_proof.clone();
+                                let tp= &thread_pools.clone()[index];
 
                                 task::spawn(async move {
                                     // Mine the next block.
