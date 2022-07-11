@@ -499,100 +499,57 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                     let tmp_total_proof = tmp_total_proof.clone();
                                     let tp = tp.clone();
 
-                                    // task::spawn(async move {
-                                    //     E::resources().register_task(
-                                    //         Some(mining_task_id),
-                                    //         task::spawn(async move {
-                                    //             // Mine the next block.
-                                    //             let result = task::spawn_blocking(move || {
-                                    //                 // E::thread_pool().install(move || {
-                                    //                 tp.install(move || {
-                                    //                     canon.mine_next_block(
-                                    //                         recipient,
-                                    //                         E::COINBASE_IS_PUBLIC,
-                                    //                         &unconfirmed_transactions,
-                                    //                         E::terminator(),
-                                    //                         &mut thread_rng(),
-                                    //                         index
-                                    //                     )
-                                    //                 })
-                                    //             })
-                                    //             .await
-                                    //             .map_err(|e| e.into());
-                                    //
-                                    //             // Set the status to `Ready`.
-                                    //             E::status().update(Status::Ready);
-                                    //
-                                    //             tmp_total_proof.add(1);
-                                    //
-                                    //             match result {
-                                    //                 Ok(Ok((block, coinbase_record))) => {
-                                    //                     debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
-                                    //                     // Store the coinbase record.
-                                    //                     if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
-                                    //                         warn!("[Miner] Failed to store coinbase record - {}", error);
-                                    //                     }
-                                    //
-                                    //                     // Broadcast the next block.
-                                    //                     let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
-                                    //                     if let Err(error) = ledger_router.send(request).await {
-                                    //                         warn!("Failed to broadcast mined block - {}", error);
-                                    //                     }
-                                    //                 }
-                                    //                 Ok(Err(error)) | Err(error) => trace!("{}", error),
-                                    //             }
-                                    //
-                                    //             E::resources().deregister(mining_task_id);
-                                    //         }),
-                                    //     );
-                                    // });
-
                                     task::spawn(async move {
-                                        // Mine the next block.
-                                        let tp = tp.clone();
-                                        let result = task::spawn_blocking(move || {
-                                            // E::thread_pool().install(move || {
-                                            tp.install(move || {
-                                                canon.mine_next_block(
-                                                    recipient,
-                                                    E::COINBASE_IS_PUBLIC,
-                                                    &unconfirmed_transactions,
-                                                    E::terminator(),
-                                                    &mut thread_rng(),
-                                                    index
-                                                )
-                                            })
-                                        })
-                                            .await
-                                            .map_err(|e| e.into());
+                                        E::resources().register_task(
+                                            Some(mining_task_id),
+                                            task::spawn(async move {
+                                                // Mine the next block.
+                                                let tp = tp.clone();
+                                                info!("--------------------------------------------------------------------run comp hash");
+                                                let result = task::spawn_blocking(move || {
+                                                    // E::thread_pool().install(move || {
+                                                    tp.install(move || {
+                                                        info!("---------------------------------------------------------------------mine next block");
+                                                        canon.mine_next_block(
+                                                            recipient,
+                                                            E::COINBASE_IS_PUBLIC,
+                                                            &unconfirmed_transactions,
+                                                            E::terminator(),
+                                                            &mut thread_rng(),
+                                                            index
+                                                        )
+                                                    })
+                                                })
+                                                .await
+                                                .map_err(|e| e.into());
 
-                                        // Set the status to `Ready`.
-                                        E::status().update(Status::Ready);
+                                                // Set the status to `Ready`.
+                                                E::status().update(Status::Ready);
 
-                                        tmp_total_proof.add(1);
+                                                tmp_total_proof.add(1);
 
-                                        match result {
-                                            Ok(Ok((block, coinbase_record))) => {
-                                                debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
-                                                // Store the coinbase record.
-                                                if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
-                                                    warn!("[Miner] Failed to store coinbase record - {}", error);
+                                                match result {
+                                                    Ok(Ok((block, coinbase_record))) => {
+                                                        debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
+                                                        // Store the coinbase record.
+                                                        if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
+                                                            warn!("[Miner] Failed to store coinbase record - {}", error);
+                                                        }
+
+                                                        // Broadcast the next block.
+                                                        let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
+                                                        if let Err(error) = ledger_router.send(request).await {
+                                                            warn!("Failed to broadcast mined block - {}", error);
+                                                        }
+                                                    }
+                                                    Ok(Err(error)) | Err(error) => trace!("{}", error),
                                                 }
 
-                                                // Broadcast the next block.
-                                                let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
-                                                if let Err(error) = ledger_router.send(request).await {
-                                                    warn!("Failed to broadcast mined block - {}", error);
-                                                }
-                                            }
-                                            Ok(Err(error)) | Err(error) => trace!("{}", error),
-                                        }
-
-                                        E::resources().deregister(mining_task_id);
+                                                E::resources().deregister(mining_task_id);
+                                            }),
+                                        );
                                     });
                                 }
-
-                                // futures::future::join_all(gpu_vec);
 
                             }
                             // Proceed to sleep for a preset amount of time.
