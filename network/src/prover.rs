@@ -415,12 +415,12 @@ impl<N: Network, E: Environment> Prover<N, E> {
 
                                 // Procure a resource id to register the task with, as it might be terminated at any point in time.
                                 let mining_task_id = E::resources().procure_id();
-                                let thread_pools = thread_pools.clone();
+                                let tmp = thread_pools.clone();
                                 let tmp_total_proof = tmp_total_proof.clone();
 
                                 task::spawn(async move {
                                     // Mine the next block.
-                                    let tp = thread_pools[index].clone();
+                                    let tp = tmp[index].clone();
                                     let result = task::spawn_blocking(move || {
                                         // E::thread_pool().install(move || {
                                         tp.install(move || {
