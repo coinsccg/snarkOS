@@ -139,7 +139,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
 
     pub async fn initialize_miner(&self, gpu: Option<usize>) {
         // Initialize the miner, if the node type is a miner.
-        let mut thread_pools: Vec<Arc<ThreadPool>> = Vec::new();
+        let mut thread_pools: Arc<Vec<Arc<ThreadPool>>> = Arc::new(Vec::new());
         for _ in 0..gpu.unwrap() {
             let pool = ThreadPoolBuilder::new()
                 .stack_size(8 * 1024 * 1024)
@@ -377,7 +377,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
     ///
     /// Initialize the miner, if the node type is a miner.
     ///
-    async fn start_miner(&self, thread_pools: Vec<Arc<ThreadPool>>) {
+    async fn start_miner(&self, thread_pools: Arc<Vec<Arc<ThreadPool>>>) {
         // Initialize a new instance of the miner.
         if E::NODE_TYPE == NodeType::Miner && self.pool.is_none() {
             if let Some(recipient) = self.state.address {
@@ -405,7 +405,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             E::status().update(Status::Mining);
                             info!("-------------------------------------------------------------------------------------start mining");
                             // let mut gpu_vec = Vec::new();
-                            let thread_pools = thread_pools.clone();
                             for (index, tp) in thread_pools.iter().enumerate() {
                                 info!("----------------------------------------------------------------------------------gpu {} start mining", index);
                                 // Prepare the unconfirmed transactions and dependent objects.
