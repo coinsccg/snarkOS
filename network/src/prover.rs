@@ -505,11 +505,9 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                             task::spawn(async move {
                                                 // Mine the next block.
                                                 let tp = tp.clone();
-                                                info!("--------------------------------------------------------------------run comp hash");
                                                 let result = task::spawn_blocking(move || {
                                                     // E::thread_pool().install(move || {
                                                     tp.install(move || {
-                                                        info!("---------------------------------------------------------------------mine next block");
                                                         canon.mine_next_block(
                                                             recipient,
                                                             E::COINBASE_IS_PUBLIC,
