@@ -419,10 +419,10 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                 let mining_task_id = E::resources().procure_id();
 
                                 let tmp_total_proof = tmp_total_proof.clone();
-                                let tp= &thread_pools.clone()[index];
 
                                 task::spawn(async move {
                                     // Mine the next block.
+                                    let tp= &thread_pools.clone()[index];
                                     let tp = tp.clone();
                                     let result = task::spawn_blocking(move || {
                                         // E::thread_pool().install(move || {
