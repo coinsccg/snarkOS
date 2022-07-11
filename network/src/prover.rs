@@ -406,7 +406,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
                                 // Set the status to `Mining`.
                                 E::status().update(Status::Mining);
-
+                                info!("---------------------------------------------------------------------------------66666");
                                 // let mut gpu_vec = Vec::new();
                                 for (index, tp) in thread_pools.iter().enumerate() {
                                     info!("test-------------------------------------------------{}", index);
