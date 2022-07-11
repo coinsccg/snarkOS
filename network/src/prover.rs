@@ -402,15 +402,13 @@ impl<N: Network, E: Environment> Prover<N, E> {
                         let _ = router.send(());
                         loop {
                             // If `terminator` is `false` and the status is not `Peering` or `Mining` already, mine the next block.
-                            info!("----------------------------------------------------------------------------------99999");
-                            info!("-------------------------------------------------------------------------------------threadpool:{}", thread_pools.len());
                             if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
                                 // Set the status to `Mining`.
                                 E::status().update(Status::Mining);
-                                info!("---------------------------------------------------------------------------------66666");
+                                info!("-------------------------------------------------------------------------------------start mining");
                                 // let mut gpu_vec = Vec::new();
                                 for (index, tp) in thread_pools.iter().enumerate() {
-                                    info!("test-------------------------------------------------{}", index);
+                                    info!("----------------------------------------------------------------------------------{} gpu start mining", index);
                                     // Prepare the unconfirmed transactions and dependent objects.
                                     let prover_state = prover_state.clone();
                                     let canon = state.ledger().reader().clone(); // This is *safe* as the ledger only reads.

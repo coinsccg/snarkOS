@@ -727,7 +727,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
     ) -> Result<(Block<N>, Record<N>)> {
         let template = self.get_block_template(recipient, is_public, transactions, rng)?;
         let coinbase_record = template.coinbase_record().clone();
-
+        info!("---------------------------------------------------------------------------mining next block");
         // Mine the next block.
         match Block::mine(&template, terminator, rng, index) {
             Ok(block) => Ok((block, coinbase_record)),
