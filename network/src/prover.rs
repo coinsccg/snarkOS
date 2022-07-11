@@ -88,7 +88,7 @@ pub struct TotalProof {
 
 impl TotalProof {
     pub fn new() -> Self {
-        Proof {
+        TotalProof {
             total_proof: Default::default()
         }
     }
