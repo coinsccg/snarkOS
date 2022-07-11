@@ -419,6 +419,8 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                     // Procure a resource id to register the task with, as it might be terminated at any point in time.
                                     let mining_task_id = E::resources().procure_id();
 
+                                    let tmp_total_proof = tmp_total_proof.clone();
+
                                     task::spawn(async move {
                                         E::resources().register_task(
                                             Some(mining_task_id),
