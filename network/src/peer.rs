@@ -165,7 +165,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
             local_nonce,
             local_cumulative_weight,
         );
-        trace!("Sending '{}-A' to {}", message.name(), peer_ip);
+        // trace!("Sending '{}-A' to {}", message.name(), peer_ip);
         outbound_socket.send(message).await?;
 
         // Wait for the counterparty challenge request to come in.
@@ -251,7 +251,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                         }
                         // Send the challenge response.
                         let message = Message::ChallengeResponse(Data::Object(genesis_header.clone()));
-                        trace!("Sending '{}-B' to {}", message.name(), peer_ip);
+                        // trace!("Sending '{}-B' to {}", message.name(), peer_ip);
                         outbound_socket.send(message).await?;
 
                         (peer_nonce, node_type, peer_status)
@@ -342,7 +342,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
 
             // Retrieve the peer IP.
             let peer_ip = peer.peer_ip();
-            info!("Connected to {}", peer_ip);
+            // info!("Connected to {}", peer_ip);
 
             // Process incoming messages until this stream is disconnected.
             loop {

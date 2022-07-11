@@ -233,19 +233,19 @@ impl<N: Network, E: Environment> Peers<N, E> {
                 if peer_ip == self.state.local_ip
                     || (peer_ip.ip().is_unspecified() || peer_ip.ip().is_loopback()) && peer_ip.port() == self.state.local_ip.port()
                 {
-                    debug!("Skipping connection request to {} (attempted to self-connect)", peer_ip);
+                    // debug!("Skipping connection request to {} (attempted to self-connect)", peer_ip);
                 }
                 // Ensure the node does not surpass the maximum number of peer connections.
                 else if self.number_of_connected_peers().await >= E::MAXIMUM_NUMBER_OF_PEERS {
-                    debug!("Skipping connection request to {} (maximum peers reached)", peer_ip);
+                    // debug!("Skipping connection request to {} (maximum peers reached)", peer_ip);
                 }
                 // Ensure the peer is a new connection.
                 else if self.is_connected_to(peer_ip).await {
-                    debug!("Skipping connection request to {} (already connected)", peer_ip);
+                    // debug!("Skipping connection request to {} (already connected)", peer_ip);
                 }
                 // Ensure the peer is not restricted.
                 else if self.is_restricted(peer_ip).await {
-                    debug!("Skipping connection request to {} (restricted)", peer_ip);
+                    // debug!("Skipping connection request to {} (restricted)", peer_ip);
                 }
                 // Attempt to open a TCP stream.
                 else {
@@ -256,9 +256,9 @@ impl<N: Network, E: Environment> Peers<N, E> {
                     let last_seen = seen_outbound_connections.entry(peer_ip).or_insert(SystemTime::UNIX_EPOCH);
                     let elapsed = last_seen.elapsed().unwrap_or(Duration::MAX).as_secs();
                     if elapsed < E::RADIO_SILENCE_IN_SECS {
-                        trace!("Skipping connection request to {} (tried {} secs ago)", peer_ip, elapsed);
+                        // trace!("Skipping connection request to {} (tried {} secs ago)", peer_ip, elapsed);
                     } else {
-                        debug!("Connecting to {}...", peer_ip);
+                        // debug!("Connecting to {}...", peer_ip);
                         // Update the last seen timestamp for this peer.
                         seen_outbound_connections.insert(peer_ip, SystemTime::now());
 
@@ -279,7 +279,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
                                     .await
                                 }
                                 Err(error) => {
-                                    trace!("Failed to connect to '{}': '{:?}'", peer_ip, error);
+                                    // trace!("Failed to connect to '{}': '{:?}'", peer_ip, error);
                                     self.candidate_peers.write().await.remove(&peer_ip);
                                 }
                             },
@@ -329,7 +329,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
                 let number_of_connected_sync_nodes = connected_sync_nodes.len();
                 let num_excess_sync_nodes = number_of_connected_sync_nodes.saturating_sub(1);
                 if num_excess_sync_nodes > 0 {
-                    debug!("Exceeded maximum number of sync nodes");
+                    // debug!("Exceeded maximum number of sync nodes");
 
                     // Proceed to send disconnect requests to these peers.
                     for peer_ip in connected_sync_nodes
@@ -409,7 +409,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
                     }
 
                     if !self.is_connected_to(peer_ip).await {
-                        trace!("Attempting connection to {}...", peer_ip);
+                        // trace!("Attempting connection to {}...", peer_ip);
 
                         // Initialize the connection process.
                         let (router, handler) = oneshot::channel();
@@ -442,7 +442,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
                 if peer_ip == self.state.local_ip
                     || (peer_ip.ip().is_unspecified() || peer_ip.ip().is_loopback()) && peer_ip.port() == self.state.local_ip.port()
                 {
-                    debug!("Skipping connection request to {} (attempted to self-connect)", peer_ip);
+                    // debug!("Skipping connection request to {} (attempted to self-connect)", peer_ip);
                 }
                 // Ensure the node does not surpass the maximum number of peer connections.
                 else if self.number_of_connected_peers().await >= E::MAXIMUM_NUMBER_OF_PEERS {

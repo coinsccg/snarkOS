@@ -205,7 +205,7 @@ pub(crate) fn handle_block_requests<N: Network, E: Environment>(
         else {
             // Case 2(c)(a) - If the common ancestor is within the fork range of this ledger, proceed to switch to the fork.
             if latest_block_height.saturating_sub(maximum_common_ancestor) <= N::ALEO_MAXIMUM_FORK_DEPTH {
-                info!("Discovered a canonical chain from {} with common ancestor {} and cumulative weight {}", maximal_peer, maximum_common_ancestor, maximum_cumulative_weight);
+                // info!("Discovered a canonical chain from {} with common ancestor {} and cumulative weight {}", maximal_peer, maximum_common_ancestor, maximum_cumulative_weight);
                 // If the latest block is the same as the maximum common ancestor, do not revert.
                 (Case::TwoCA, maximum_common_ancestor, latest_block_height != maximum_common_ancestor)
             }

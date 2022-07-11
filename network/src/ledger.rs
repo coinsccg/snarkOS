@@ -185,7 +185,7 @@ impl<N: Network, E: Environment> Ledger<N, E> {
                         .map(|requests| requests.is_empty())
                         .unwrap_or(false)
                     {
-                        trace!("All block requests with {} have been processed", peer_ip);
+                        // trace!("All block requests with {} have been processed", peer_ip);
                         self.update_block_requests().await;
                     }
                 }
