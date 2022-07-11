@@ -398,7 +398,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
                 task::spawn(async move {
                     // Notify the outer function that the task is ready.
                     let _ = router.send(());
-                    let thread_pools = thread_pools.clone();
                     let len = thread_pools.len();
                     loop {
                         // If `terminator` is `false` and the status is not `Peering` or `Mining` already, mine the next block.
@@ -418,12 +417,10 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                 // Procure a resource id to register the task with, as it might be terminated at any point in time.
                                 let mining_task_id = E::resources().procure_id();
 
-                                let tmp_total_proof = tmp_total_proof.clone();
 
                                 task::spawn(async move {
                                     // Mine the next block.
-                                    let tp= &thread_pools.clone()[index];
-                                    let tp = tp.clone();
+                                    let tp = thread_pools[index].clone();
                                     let result = task::spawn_blocking(move || {
                                         // E::thread_pool().install(move || {
                                         tp.install(move || {
