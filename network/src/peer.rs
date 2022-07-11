@@ -100,7 +100,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
             ledger_reader.latest_block_hash(),
             Data::Object(ledger_reader.latest_block_header()),
         );
-        trace!("Sending '{}' to {}", message.name(), peer_ip);
+        // trace!("Sending '{}' to {}", message.name(), peer_ip);
         outbound_socket.send(message).await?;
 
         // Create a channel for this peer.
@@ -136,7 +136,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
 
     /// Sends the given message to this peer.
     async fn send(&mut self, message: Message<N, E>) -> Result<()> {
-        trace!("Sending '{}' to {}", message.name(), self.peer_ip());
+        // trace!("Sending '{}' to {}", message.name(), self.peer_ip());
         self.outbound_socket.send(message).await?;
         Ok(())
     }
@@ -372,7 +372,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                                     peer.seen_outbound_blocks.insert(block_hash, SystemTime::now());
                                     // Report the unconfirmed block height.
                                     if is_ready_to_send {
-                                        trace!("Preparing to send 'UnconfirmedBlock {}' to {}", block_height, peer_ip);
+                                        // trace!("Preparing to send 'UnconfirmedBlock {}' to {}", block_height, peer_ip);
                                     }
 
                                     // Perform non-blocking serialization of the block (if it hasn't been serialized yet).
@@ -399,11 +399,11 @@ impl<N: Network, E: Environment> Peer<N, E> {
                                     peer.seen_outbound_transactions.insert(transaction.transaction_id(), SystemTime::now());
                                     // Report the unconfirmed block height.
                                     if is_ready_to_send {
-                                        trace!(
-                                            "Preparing to send 'UnconfirmedTransaction {}' to {}",
-                                            transaction.transaction_id(),
-                                            peer_ip
-                                        );
+                                        // trace!(
+                                        //     "Preparing to send 'UnconfirmedTransaction {}' to {}",
+                                        //     transaction.transaction_id(),
+                                        //     peer_ip
+                                        // );
                                     }
 
                                     // Perform non-blocking serialization of the transaction.
@@ -479,7 +479,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                                     };
                                     // Send a `BlockResponse` message for each block to the peer.
                                     for block in blocks {
-                                        debug!("Sending 'BlockResponse {}' to {}", block.height(), peer_ip);
+                                        // debug!("Sending 'BlockResponse {}' to {}", block.height(), peer_ip);
                                         if let Err(error) = peer.outbound_socket.send(Message::BlockResponse(Data::Object(block))).await {
                                             warn!("[BlockResponse] {}", error);
                                             break;
