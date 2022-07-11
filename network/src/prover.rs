@@ -385,7 +385,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                                             &unconfirmed_transactions,
                                                             E::terminator(),
                                                             &mut thread_rng(),
-                                                            0
+                                                            index
                                                         )
                                                     })
                                                 })
