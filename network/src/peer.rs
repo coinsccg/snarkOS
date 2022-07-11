@@ -578,7 +578,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                                                 && node_type == NodeType::Sync
                                                 && state.ledger().reader().latest_cumulative_weight() > block_header.cumulative_weight()
                                             {
-                                                trace!("Disconnecting from {} (ahead of sync node)", peer_ip);
+                                                // trace!("Disconnecting from {} (ahead of sync node)", peer_ip);
                                                 break;
                                             }
 
@@ -701,7 +701,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
 
                                     // If this node is a beacon or sync node, skip this message, after updating the timestamp.
                                     if E::NODE_TYPE == NodeType::Beacon || E::NODE_TYPE == NodeType::Sync || !is_router_ready || !is_within_range || !is_node_ready {
-                                        trace!("Skipping 'UnconfirmedBlock {}' from {}", block_height, peer_ip)
+                                        // trace!("Skipping 'UnconfirmedBlock {}' from {}", block_height, peer_ip)
                                     } else {
                                         // Perform the deferred non-blocking deserialization of the block.
                                         let request = match block.deserialize().await {
@@ -753,7 +753,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
 
                                             // If this node is a beacon or sync node, skip this message, after updating the timestamp.
                                             if E::NODE_TYPE == NodeType::Beacon || E::NODE_TYPE == NodeType::Sync || !is_router_ready || !is_node_ready {
-                                                trace!("Skipping 'UnconfirmedTransaction {}' from {}", transaction.transaction_id(), peer_ip);
+                                                // trace!("Skipping 'UnconfirmedTransaction {}' from {}", transaction.transaction_id(), peer_ip);
                                             } else {
                                                 // Route the `UnconfirmedTransaction` to the prover.
                                                 if let Err(error) = state.prover().router().send(ProverRequest::UnconfirmedTransaction(peer_ip, transaction)).await {
@@ -768,14 +768,14 @@ impl<N: Network, E: Environment> Peer<N, E> {
                                 }
                                 Message::PoolRegister(address) => {
                                     if E::NODE_TYPE != NodeType::Operator {
-                                        trace!("Skipping 'PoolRegister' from {}", peer_ip);
+                                        // trace!("Skipping 'PoolRegister' from {}", peer_ip);
                                     } else if let Err(error) = state.operator().router().send(OperatorRequest::PoolRegister(peer_ip, address)).await {
                                         warn!("[PoolRegister] {}", error);
                                     }
                                 }
                                 Message::PoolRequest(share_difficulty, block_template) => {
                                     if E::NODE_TYPE != NodeType::Prover {
-                                        trace!("Skipping 'PoolRequest' from {}", peer_ip);
+                                        // trace!("Skipping 'PoolRequest' from {}", peer_ip);
                                     } else if let Ok(block_template) = block_template.deserialize().await {
                                         if let Err(error) = state.prover().router().send(ProverRequest::PoolRequest(peer_ip, share_difficulty, block_template)).await {
                                             warn!("[PoolRequest] {}", error);
@@ -786,7 +786,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                                 }
                                 Message::PoolResponse(address, nonce, proof) => {
                                     if E::NODE_TYPE != NodeType::Operator {
-                                        trace!("Skipping 'PoolResponse' from {}", peer_ip);
+                                        // trace!("Skipping 'PoolResponse' from {}", peer_ip);
                                     } else if let Ok(proof) = proof.deserialize().await {
                                         if let Err(error) = state.operator().router().send(OperatorRequest::PoolResponse(peer_ip, address, nonce, proof)).await {
                                             warn!("[PoolResponse] {}", error);

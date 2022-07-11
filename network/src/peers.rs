@@ -284,7 +284,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
                                 }
                             },
                             Err(error) => {
-                                error!("Unable to reach '{}': '{:?}'", peer_ip, error);
+                                // error!("Unable to reach '{}': '{:?}'", peer_ip, error);
                                 self.candidate_peers.write().await.remove(&peer_ip);
                             }
                         };
@@ -316,7 +316,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
 
                     // Proceed to send disconnect requests to these peers.
                     for peer_ip in peer_ips_to_disconnect {
-                        info!("Disconnecting from {} (exceeded maximum connections)", peer_ip);
+                        // info!("Disconnecting from {} (exceeded maximum connections)", peer_ip);
                         self.send(peer_ip, Message::Disconnect(DisconnectReason::TooManyPeers)).await;
                         // Add an entry for this `Peer` in the restricted peers.
                         self.restricted_peers.write().await.insert(peer_ip, Instant::now());
@@ -337,7 +337,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
                         .copied()
                         .choose_multiple(&mut OsRng::default(), num_excess_sync_nodes)
                     {
-                        info!("Disconnecting from {} (exceeded maximum connections)", peer_ip);
+                        // info!("Disconnecting from {} (exceeded maximum connections)", peer_ip);
                         self.send(peer_ip, Message::Disconnect(DisconnectReason::TooManyPeers)).await;
                         // Add an entry for this `Peer` in the restricted peers.
                         self.restricted_peers.write().await.insert(peer_ip, Instant::now());

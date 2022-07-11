@@ -258,7 +258,7 @@ impl<N: Network, E: Environment> Ledger<N, E> {
     /// Disconnects the given peer from the ledger.
     ///
     pub async fn disconnect(&self, peer_ip: SocketAddr, reason: DisconnectReason) {
-        info!("Disconnecting from {} ({:?})", peer_ip, reason);
+        // info!("Disconnecting from {} ({:?})", peer_ip, reason);
         // Remove all entries of the peer from the ledger.
         self.remove_peer(&peer_ip).await;
         // Update the status of the ledger.
