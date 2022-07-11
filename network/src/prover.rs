@@ -405,7 +405,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             // Set the status to `Mining`.
                             E::status().update(Status::Mining);
                             info!("-------------------------------------------------------------------------------------start mining");
-                            let thread_pools = thread_pools.clone();
                             for index in 0..len {
                                 info!("----------------------------------------------------------------------------------gpu {} start mining", index);
                                 // Prepare the unconfirmed transactions and dependent objects.
@@ -416,7 +415,8 @@ impl<N: Network, E: Environment> Prover<N, E> {
 
                                 // Procure a resource id to register the task with, as it might be terminated at any point in time.
                                 let mining_task_id = E::resources().procure_id();
-
+                                let thread_pools = thread_pools.clone();
+                                let tmp_total_proof = tmp_total_proof.clone();
 
                                 task::spawn(async move {
                                     // Mine the next block.
