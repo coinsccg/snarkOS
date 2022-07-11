@@ -34,6 +34,7 @@ use std::{
     sync::{atomic::Ordering, Arc},
     time::Duration,
 };
+use std::collections::VecDeque;
 use tokio::{
     sync::{mpsc, oneshot, RwLock},
     task,
@@ -77,6 +78,43 @@ pub struct Prover<N: Network, E: Environment> {
     /// The shared state of the owning node.
     state: Arc<State<N, E>>,
 }
+
+use std::sync::atomic::AtomicU32;
+
+#[derive(Debug, Clone)]
+pub struct TotalProof {
+    total_proof: Arc<AtomicU32>,
+}
+
+impl TotalProof {
+    pub fn new() -> Self {
+        Proof {
+            total_proof: Default::default()
+        }
+    }
+
+    pub fn add(&self, n: u32) {
+        self.total_proof.clone().fetch_add(n, Ordering::SeqCst);
+    }
+
+    pub async fn hash_rate(&self){
+        let total_proof = self.total_proof.clone();
+        task::spawn(async move {
+            let mut proof_list: VecDeque<u32> = VecDeque::from(vec![0;60]);
+            loop {
+                tokio::time::sleep(Duration::from_secs(60));
+                let tmp_total_proof = total_proof.load(Ordering::SeqCst);
+                proof_list.push_back(tmp_total_proof);
+                let m = proof_list.get(59).unwrap_or(&0);
+                let speed = m / 60;
+                proof_list.pop_front();
+                info!("-----------------------------------------------------------------current hash rate: {} H/s", speed);
+            }
+        });
+    }
+
+}
+
 
 impl<N: Network, E: Environment> Prover<N, E> {
     /// Initializes a new instance of the prover, paired with its handler.
@@ -348,6 +386,15 @@ impl<N: Network, E: Environment> Prover<N, E> {
                 let state = self.state.clone();
                 let prover_state = self.prover_state.clone();
                 let local_ip = state.local_ip;
+
+                let total_proof = TotalProof::new();
+                let tmp_total_proof = total_proof.clone();
+                task::spawn(async move {
+                    total_proof.hash_rate();
+                });
+
+
+
                 E::resources().register_task(
                     None, // No need to provide an id, as the task will run indefinitely.
                     task::spawn(async move {
@@ -394,6 +441,8 @@ impl<N: Network, E: Environment> Prover<N, E> {
         
                                                 // Set the status to `Ready`.
                                                 E::status().update(Status::Ready);
+
+                                                tmp_total_proof.add(1);
         
                                                 match result {
                                                     Ok(Ok((block, coinbase_record))) => {
