@@ -2704,7 +2704,7 @@ dependencies = [
  "snarkos-network",
  "snarkos-rpc",
  "snarkos-storage",
- "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "thiserror",
  "tokio",
  "tracing",
@@ -2753,7 +2753,7 @@ dependencies = [
  "rayon",
  "serde",
  "serde_json",
- "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "tokio",
  "tokio-metrics",
  "tokio-util",
@@ -2775,7 +2775,7 @@ dependencies = [
  "snarkos-integration",
  "snarkos-metrics",
  "snarkos-synthetic-node",
- "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "tokio",
  "tracing",
  "tracing-subscriber",
@@ -2807,7 +2807,7 @@ dependencies = [
  "snarkos-environment",
  "snarkos-metrics",
  "snarkos-storage",
- "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "time",
  "tokio",
  "tokio-stream",
@@ -2832,7 +2832,7 @@ dependencies = [
  "snarkos-environment",
  "snarkos-network",
  "snarkos-storage",
- "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "tempfile",
  "thiserror",
  "time",
@@ -2858,7 +2858,7 @@ dependencies = [
  "serde",
  "snarkos-environment",
  "snarkos-storage",
- "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "tempfile",
  "time",
  "tokio",
@@ -2875,21 +2875,11 @@ dependencies = [
  "pea2pea",
  "rand",
  "snarkos-environment",
- "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "snarkvm 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "tokio",
  "tokio-util",
  "tracing",
  "tracing-subscriber",
-]
-
-[[package]]
-name = "snarkvm"
-version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
-dependencies = [
- "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-dpc 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
 ]
 
 [[package]]
@@ -2902,35 +2892,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-algorithms"
+name = "snarkvm"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
- "aleo-std",
- "anyhow",
- "blake2",
- "blake2s_simd",
- "crossbeam-channel",
- "derivative",
- "digest 0.9.0",
- "hex",
- "itertools",
- "lazy_static",
- "num_cpus",
- "once_cell",
- "rand",
- "rand_chacha",
- "rayon",
- "rust-gpu-tools",
- "serde",
- "sha2",
- "smallvec",
- "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-profiler 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "thiserror",
+ "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-dpc 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
 ]
 
 [[package]]
@@ -2966,16 +2934,34 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-curves"
+name = "snarkvm-algorithms"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
+ "aleo-std",
+ "anyhow",
+ "blake2",
+ "blake2s_simd",
+ "crossbeam-channel",
  "derivative",
+ "digest 0.9.0",
+ "hex",
+ "itertools",
+ "lazy_static",
+ "num_cpus",
+ "once_cell",
  "rand",
- "rustc_version",
+ "rand_chacha",
+ "rayon",
+ "rust-gpu-tools",
  "serde",
- "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "sha2",
+ "smallvec",
+ "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-profiler 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "thiserror",
 ]
 
@@ -2994,15 +2980,17 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-derives"
+name = "snarkvm-curves"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
- "proc-macro-crate",
- "proc-macro-error",
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "derivative",
+ "rand",
+ "rustc_version",
+ "serde",
+ "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "thiserror",
 ]
 
 [[package]]
@@ -3018,35 +3006,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-dpc"
+name = "snarkvm-derives"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
- "anyhow",
- "base58",
- "bech32",
- "bincode",
- "blake2",
- "chrono",
- "derivative",
- "hex",
- "itertools",
- "once_cell",
- "rand",
- "rayon",
- "serde",
- "serde_json",
- "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-gadgets 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-marlin 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-parameters 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-polycommit 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-profiler 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "thiserror",
+ "proc-macro-crate",
+ "proc-macro-error",
+ "proc-macro2 1.0.40",
+ "quote 1.0.20",
+ "syn 1.0.98",
 ]
 
 [[package]]
@@ -3082,16 +3050,34 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-fields"
+name = "snarkvm-dpc"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
  "anyhow",
+ "base58",
+ "bech32",
+ "bincode",
+ "blake2",
+ "chrono",
  "derivative",
+ "hex",
+ "itertools",
+ "once_cell",
  "rand",
  "rayon",
  "serde",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "serde_json",
+ "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-gadgets 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-marlin 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-parameters 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-polycommit 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-profiler 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "thiserror",
 ]
 
@@ -3110,22 +3096,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-gadgets"
+name = "snarkvm-fields"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
  "anyhow",
  "derivative",
- "digest 0.9.0",
- "itertools",
- "num-bigint",
- "num-integer",
- "num-traits",
- "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "rand",
+ "rayon",
+ "serde",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "thiserror",
 ]
 
@@ -3150,29 +3130,23 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-marlin"
+name = "snarkvm-gadgets"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
- "bincode",
- "blake2",
+ "anyhow",
  "derivative",
  "digest 0.9.0",
- "hashbrown 0.11.2",
- "rand",
- "rand_chacha",
- "rand_core",
- "rayon",
- "serde",
- "smallvec",
- "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-gadgets 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-polycommit 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-profiler 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "itertools",
+ "num-bigint",
+ "num-integer",
+ "num-traits",
+ "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "thiserror",
 ]
 
 [[package]]
@@ -3202,20 +3176,29 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-parameters"
+name = "snarkvm-marlin"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
- "aleo-std",
- "anyhow",
- "cfg-if",
- "curl",
- "hex",
- "paste",
- "serde_json",
- "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "thiserror",
+ "bincode",
+ "blake2",
+ "derivative",
+ "digest 0.9.0",
+ "hashbrown 0.11.2",
+ "rand",
+ "rand_chacha",
+ "rand_core",
+ "rayon",
+ "serde",
+ "smallvec",
+ "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-gadgets 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-polycommit 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-profiler 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
 ]
 
 [[package]]
@@ -3236,24 +3219,20 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-polycommit"
+name = "snarkvm-parameters"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
- "derivative",
- "digest 0.9.0",
- "hashbrown 0.11.2",
- "itertools",
- "rand",
- "rand_core",
- "rayon",
- "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-gadgets 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-profiler 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "aleo-std",
+ "anyhow",
+ "cfg-if",
+ "curl",
+ "hex",
+ "paste",
+ "serde_json",
+ "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "thiserror",
 ]
 
 [[package]]
@@ -3278,9 +3257,25 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-profiler"
+name = "snarkvm-polycommit"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
+dependencies = [
+ "derivative",
+ "digest 0.9.0",
+ "hashbrown 0.11.2",
+ "itertools",
+ "rand",
+ "rand_core",
+ "rayon",
+ "snarkvm-algorithms 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-gadgets 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-profiler 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-r1cs 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+]
 
 [[package]]
 name = "snarkvm-profiler"
@@ -3288,20 +3283,9 @@ version = "0.8.0"
 source = "git+https://github.com/coinsccg/snarkvm?rev=c1abe9e09#c1abe9e0958e0903b7d35ea85e4bd373b3b5dcf5"
 
 [[package]]
-name = "snarkvm-r1cs"
+name = "snarkvm-profiler"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
-dependencies = [
- "anyhow",
- "cfg-if",
- "fxhash",
- "indexmap",
- "itertools",
- "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
- "thiserror",
-]
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 
 [[package]]
 name = "snarkvm-r1cs"
@@ -3320,20 +3304,18 @@ dependencies = [
 ]
 
 [[package]]
-name = "snarkvm-utilities"
+name = "snarkvm-r1cs"
 version = "0.8.0"
-source = "git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0#75e6bd8e0d05d6d37183598aae251af4306a74f9"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
 dependencies = [
- "aleo-std",
  "anyhow",
- "bincode",
+ "cfg-if",
+ "fxhash",
+ "indexmap",
  "itertools",
- "num-bigint",
- "num_cpus",
- "rand",
- "rayon",
- "serde",
- "snarkvm-derives 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=75e6bd8e0)",
+ "snarkvm-curves 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-fields 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
+ "snarkvm-utilities 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "thiserror",
 ]
 
@@ -3352,6 +3334,24 @@ dependencies = [
  "rayon",
  "serde",
  "snarkvm-derives 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=c1abe9e09)",
+ "thiserror",
+]
+
+[[package]]
+name = "snarkvm-utilities"
+version = "0.8.0"
+source = "git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1#ebe969bd1143ab8b34a2bfe6790f0da0ccf7f0a2"
+dependencies = [
+ "aleo-std",
+ "anyhow",
+ "bincode",
+ "itertools",
+ "num-bigint",
+ "num_cpus",
+ "rand",
+ "rayon",
+ "serde",
+ "snarkvm-derives 0.8.0 (git+https://github.com/coinsccg/snarkvm?rev=ebe969bd1)",
  "thiserror",
 ]
 
