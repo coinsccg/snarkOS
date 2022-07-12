@@ -419,7 +419,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
         // Fetch the latest state of the ledger.
         let latest_block = self.latest_block();
         let previous_ledger_root = self.latest_ledger_root();
-
+        info!("-----------------------------------------------------------------------1111");
         // Prepare the new block.
         let previous_block_hash = latest_block.hash();
         let block_height = latest_block.height().saturating_add(1);
@@ -428,7 +428,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
             OffsetDateTime::now_utc().unix_timestamp(),
             latest_block.timestamp().saturating_add(1),
         );
-
+        info!("-----------------------------------------------------------------------2222");
         // Compute the block difficulty target.
         let difficulty_target = if N::NETWORK_ID == 2 && block_height <= snarkvm::dpc::testnet2::V12_UPGRADE_BLOCK_HEIGHT {
             Blocks::<N>::compute_difficulty_target(latest_block.header(), block_timestamp, block_height)
@@ -438,7 +438,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
         } else {
             Blocks::<N>::compute_difficulty_target(N::genesis_block().header(), block_timestamp, block_height)
         };
-
+        info!("-----------------------------------------------------------------------3333");
         // Compute the cumulative weight.
         let cumulative_weight = latest_block
             .cumulative_weight()
@@ -447,7 +447,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
         // Compute the coinbase reward (not including the transaction fees).
         let mut coinbase_reward = Block::<N>::block_reward(block_height);
         let mut transaction_fees = AleoAmount::ZERO;
-
+        info!("-----------------------------------------------------------------------4444");
         // Filter the transactions to ensure they are new, and append the coinbase transaction.
         let mut transactions: Vec<Transaction<N>> = transactions
             .iter()
@@ -478,7 +478,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
             })
             .cloned()
             .collect();
-
+        info!("-----------------------------------------------------------------------5555");
         // Enforce that the transaction fee is positive or zero.
         if transaction_fees.is_negative() {
             return Err(anyhow!("Invalid transaction fees"));
@@ -490,7 +490,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
         // Craft a coinbase transaction, and append it to the list of transactions.
         let (coinbase_transaction, coinbase_record) = Transaction::<N>::new_coinbase(recipient, coinbase_reward, is_public, rng)?;
         transactions.push(coinbase_transaction);
-
+        info!("-----------------------------------------------------------------------6666");
         // Construct the new block transactions.
         let transactions = Transactions::from(&transactions)?;
 
