@@ -91,3 +91,4 @@ version = "0.1"
 default = [ ]
 prometheus = [ "snarkos-metrics/prometheus" ]
 test = [ "snarkos-metrics/test" ]
+cuda = ["snarkvm/cuda"]

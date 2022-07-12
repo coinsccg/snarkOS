@@ -94,6 +94,7 @@ impl TotalProof {
     }
 
     pub fn add(&self, n: u32) {
+        info!("----------------------------------------------------------------------add 1");
         self.total_proof.clone().fetch_add(n, Ordering::SeqCst);
     }
 
