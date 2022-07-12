@@ -172,7 +172,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
         let (peer_nonce, node_type, status) = match outbound_socket.next().await {
             Some(Ok(message)) => {
                 // Process the message.
-                trace!("Received '{}-B' from {}", message.name(), peer_ip);
+                // trace!("Received '{}-B' from {}", message.name(), peer_ip);
                 match message {
                     Message::ChallengeRequest(
                         version,
@@ -274,7 +274,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
         match outbound_socket.next().await {
             Some(Ok(message)) => {
                 // Process the message.
-                trace!("Received '{}-A' from {}", message.name(), peer_ip);
+                // trace!("Received '{}-A' from {}", message.name(), peer_ip);
                 match message {
                     Message::ChallengeResponse(block_header) => {
                         // Perform the deferred non-blocking deserialization of the block header.

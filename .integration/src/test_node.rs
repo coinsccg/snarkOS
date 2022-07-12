@@ -150,7 +150,7 @@ impl Reading for TestNode {
             ClientMessage::BlockRequest(_start_block_height, _end_block_height) => {}
             ClientMessage::BlockResponse(_block) => {}
             ClientMessage::Disconnect(reason) => {
-                debug!("Peer {} disconnected for the following reason: {:?}", source, reason);
+                // debug!("Peer {} disconnected for the following reason: {:?}", source, reason);
             }
             ClientMessage::PeerRequest => self.process_peer_request(source).await?,
             ClientMessage::PeerResponse(peer_addrs, _) => self.process_peer_response(source, peer_addrs).await?,

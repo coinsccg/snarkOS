@@ -298,7 +298,7 @@ impl Reading for Crawler {
         if let InboundMessage::Handled(message) = message {
             match *message {
                 ClientMessage::Disconnect(reason) => {
-                    debug!(parent: self.node().span(), "peer {} disconnected for the following reason: {:?}", source, reason);
+                    // debug!(parent: self.node().span(), "peer {} disconnected for the following reason: {:?}", source, reason);
                     Ok(())
                 }
                 ClientMessage::PeerRequest => {

@@ -481,6 +481,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
         info!("-----------------------------------------------------------------------5555");
         // Enforce that the transaction fee is positive or zero.
         if transaction_fees.is_negative() {
+            info!("----------------------------------------------------------------------77777");
             return Err(anyhow!("Invalid transaction fees"));
         }
 
