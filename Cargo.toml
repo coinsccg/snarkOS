@@ -91,7 +91,7 @@ version = "2.0.2"
 
 [dependencies.snarkvm]
 git = "https://github.com/coinsccg/snarkvm"
-rev = "0ef38f515"
+rev = "75e6bd8e0"
 
 [dependencies.clap]
 version = "3.2"
