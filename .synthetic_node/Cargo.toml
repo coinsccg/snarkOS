@@ -40,7 +40,7 @@ features = [ "network" ]
 
 [dependencies.snarkvm]
 git = "https://github.com/coinsccg/snarkVM.git"
-rev = "b1253fa3f"
+rev = "60ba4caa2"
 
 [dependencies.tokio]
 version = "1"
