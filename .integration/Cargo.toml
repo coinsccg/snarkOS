@@ -58,7 +58,7 @@ version = "2.0.2"
 
 [dependencies.snarkvm]
 git = "https://github.com/coinsccg/snarkvm"
-rev = "65e6652f8"
+branch = "gpu"
 
 [dependencies.clap]
 version = "3.1"

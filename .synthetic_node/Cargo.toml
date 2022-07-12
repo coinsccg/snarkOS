@@ -40,7 +40,7 @@ features = [ "network" ]
 
 [dependencies.snarkvm]
 git = "https://github.com/coinsccg/snarkVM.git"
-rev = "65e6652f8"
+branch = "gpu"
 
 [dependencies.tokio]
 version = "1"

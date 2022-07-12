@@ -94,7 +94,6 @@ impl TotalProof {
     }
 
     pub fn add(&self, n: u32) {
-        info!("----------------------------------------------------------------------add 1");
         self.total_proof.clone().fetch_add(n, Ordering::SeqCst);
     }
 
@@ -109,7 +108,7 @@ impl TotalProof {
                 let m = proof_list.get(59).unwrap_or(&0);
                 let speed = m / 60;
                 proof_list.pop_front();
-                info!("-----------------------------------------------------------------hash rate: {} H/s", speed);
+                info!("-----------------------------------------------------------------total proof: {} -- hash rate: {} H/s", tmp_total_proof, speed);
             }
         });
     }
@@ -483,7 +482,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
                                 // Set the status to `Mining`.
                                 E::status().update(Status::Mining);
-                                info!("-------------------------------------------------------------------------------------start mining");
                                 // let mut gpu_vec = Vec::new();
                                 let thread_pools = thread_pools.clone();
                                 for (index, tp) in thread_pools.iter().enumerate() {
