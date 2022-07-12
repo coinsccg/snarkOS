@@ -490,9 +490,9 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
 
         // Craft a coinbase transaction, and append it to the list of transactions.
         let (coinbase_transaction, coinbase_record) = Transaction::<N>::new_coinbase(recipient, coinbase_reward, is_public, rng)?;
-        info!("-----------------------------------------------------------------------8585858");
+
         transactions.push(coinbase_transaction);
-        info!("-----------------------------------------------------------------------6666");
+
         // Construct the new block transactions.
         let transactions = Transactions::from(&transactions)?;
 
