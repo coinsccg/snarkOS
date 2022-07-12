@@ -484,12 +484,13 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
             info!("----------------------------------------------------------------------77777");
             return Err(anyhow!("Invalid transaction fees"));
         }
-
+        info!("-----------------------------------------------------------------------6565656");
         // Calculate the final coinbase reward (including the transaction fees).
         coinbase_reward = coinbase_reward.add(transaction_fees);
-
+        info!("-----------------------------------------------------------------------75757575");
         // Craft a coinbase transaction, and append it to the list of transactions.
         let (coinbase_transaction, coinbase_record) = Transaction::<N>::new_coinbase(recipient, coinbase_reward, is_public, rng)?;
+        info!("-----------------------------------------------------------------------8585858");
         transactions.push(coinbase_transaction);
         info!("-----------------------------------------------------------------------6666");
         // Construct the new block transactions.
