@@ -88,7 +88,7 @@ version = "=0.1"
 version = "0.1"
 
 [features]
-default = [ ]
+default = [ "cuda" ]
 prometheus = [ "snarkos-metrics/prometheus" ]
 test = [ "snarkos-metrics/test" ]
 cuda = ["snarkvm/cuda"]
