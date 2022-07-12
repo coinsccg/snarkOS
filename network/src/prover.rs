@@ -105,10 +105,11 @@ impl TotalProof {
                 tokio::time::sleep(Duration::from_secs(60)).await;
                 let tmp_total_proof = total_proof.load(Ordering::SeqCst);
                 proof_list.push_back(tmp_total_proof);
-                let m = proof_list.get(59).unwrap_or(&0);
-                let speed = m / 60;
+                let m = proof_list.get(59).unwrap();
+                let speed = (tmp_total_proof - m) as f64 / 60 as f64;
+                let speed_str = format!("{:.2}", speed);
                 proof_list.pop_front();
-                info!("-----------------------------------------------------------------total proof: {} -- hash rate: {} H/s", tmp_total_proof, speed);
+                info!("-----------------------------------------------------------------total proof: {} -- hash rate: {} H/s", tmp_total_proof, speed_str);
             }
         });
     }
@@ -144,7 +145,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
         for _ in 0..gpu.unwrap() {
             let pool = ThreadPoolBuilder::new()
                 .stack_size(8 * 1024 * 1024)
-                .num_threads(2)
+                .num_threads(4)
                 .build()
                 .expect("failed create thread pool");
             thread_pools.push(Arc::new(pool));
@@ -395,165 +396,164 @@ impl<N: Network, E: Environment> Prover<N, E> {
                 });
 
 
-                // task::spawn(async move {
-                //     // Notify the outer function that the task is ready.
-                //     let _ = router.send(());
-                //     let len = thread_pools.len();
-                //     loop {
-                //         // If `terminator` is `false` and the status is not `Peering` or `Mining` already, mine the next block.
-                //         if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
-                //             // Set the status to `Mining`.
-                //             E::status().update(Status::Mining);
-                //             info!("-------------------------------------------------------------------------------------start mining");
-                //             for index in 0..len {
-                //                 info!("----------------------------------------------------------------------------------gpu {} start mining", index);
-                //                 // Prepare the unconfirmed transactions and dependent objects.
-                //                 let prover_state = prover_state.clone();
-                //                 let canon = state.ledger().reader().clone(); // This is *safe* as the ledger only reads.
-                //                 let unconfirmed_transactions = state.prover().memory_pool.read().await.transactions();
-                //                 let ledger_router = state.ledger().router().clone();
-                //
-                //                 // Procure a resource id to register the task with, as it might be terminated at any point in time.
-                //                 let mining_task_id = E::resources().procure_id();
-                //                 let thread_pools = thread_pools.clone();
-                //                 let tmp_total_proof = tmp_total_proof.clone();
-                //
-                //                 task::spawn(async move {
-                //                     // Mine the next block.
-                //                     let tp = thread_pools[index].clone();
-                //                     let result = task::spawn_blocking(move || {
-                //                         // E::thread_pool().install(move || {
-                //                         tp.install(move || {
-                //                             canon.mine_next_block(
-                //                                 recipient,
-                //                                 E::COINBASE_IS_PUBLIC,
-                //                                 &unconfirmed_transactions,
-                //                                 E::terminator(),
-                //                                 &mut thread_rng(),
-                //                                 index
-                //                             )
-                //                         })
-                //                     })
-                //                         .await
-                //                         .map_err(|e| e.into());
-                //
-                //                     // Set the status to `Ready`.
-                //                     E::status().update(Status::Ready);
-                //
-                //                     tmp_total_proof.add(1);
-                //
-                //                     match result {
-                //                         Ok(Ok((block, coinbase_record))) => {
-                //                             debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
-                //                             // Store the coinbase record.
-                //                             if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
-                //                                 warn!("[Miner] Failed to store coinbase record - {}", error);
-                //                             }
-                //
-                //                             // Broadcast the next block.
-                //                             let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
-                //                             if let Err(error) = ledger_router.send(request).await {
-                //                                 warn!("Failed to broadcast mined block - {}", error);
-                //                             }
-                //                         }
-                //                         Ok(Err(error)) | Err(error) => trace!("{}", error),
-                //                     }
-                //
-                //                     E::resources().deregister(mining_task_id);
-                //                 });
-                //             }
-                //
-                //             // futures::future::join_all(gpu_vec);
-                //
-                //         }
-                //         // Proceed to sleep for a preset amount of time.
-                //         tokio::time::sleep(MINER_HEARTBEAT_IN_SECONDS).await;
-                //     }
-                // });
+                task::spawn(async move {
+                    // Notify the outer function that the task is ready.
+                    let _ = router.send(());
+                    let len = thread_pools.len();
+                    loop {
+                        // If `terminator` is `false` and the status is not `Peering` or `Mining` already, mine the next block.
+                        if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
+                            // Set the status to `Mining`.
+                            E::status().update(Status::Mining);
+                            info!("-------------------------------------------------------------------------------------start mining");
+                            for (index, tp) in thread_pools.iter().enumerate(){
+                                info!("----------------------------------------------------------------------------------gpu {} start mining", index);
+                                // Prepare the unconfirmed transactions and dependent objects.
+                                let prover_state = prover_state.clone();
+                                let canon = state.ledger().reader().clone(); // This is *safe* as the ledger only reads.
+                                let unconfirmed_transactions = state.prover().memory_pool.read().await.transactions();
+                                let ledger_router = state.ledger().router().clone();
 
+                                // Procure a resource id to register the task with, as it might be terminated at any point in time.
+                                let mining_task_id = E::resources().procure_id();
+                                let tp = tp.clone();
+                                let tmp_total_proof = tmp_total_proof.clone();
 
-                E::resources().register_task(
-                    None, // No need to provide an id, as the task will run indefinitely.
-                    task::spawn(async move {
-                        // Notify the outer function that the task is ready.
-                        let _ = router.send(());
-                        loop {
-                            // If `terminator` is `false` and the status is not `Peering` or `Mining` already, mine the next block.
-                            if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
-                                // Set the status to `Mining`.
-                                E::status().update(Status::Mining);
-                                // let mut gpu_vec = Vec::new();
-                                let thread_pools = thread_pools.clone();
-                                for (index, tp) in thread_pools.iter().enumerate() {
-                                    info!("----------------------------------------------------------------------------------gpu {} start mining", index);
-                                    // Prepare the unconfirmed transactions and dependent objects.
-                                    let prover_state = prover_state.clone();
-                                    let canon = state.ledger().reader().clone(); // This is *safe* as the ledger only reads.
-                                    let unconfirmed_transactions = state.prover().memory_pool.read().await.transactions();
-                                    let ledger_router = state.ledger().router().clone();
-
-                                    // Procure a resource id to register the task with, as it might be terminated at any point in time.
-                                    let mining_task_id = E::resources().procure_id();
-
-                                    let tmp_total_proof = tmp_total_proof.clone();
+                                task::spawn(async move {
+                                    // Mine the next block.
                                     let tp = tp.clone();
+                                    let result = task::spawn_blocking(move || {
+                                        tp.install(move || {
+                                            canon.mine_next_block(
+                                                recipient,
+                                                E::COINBASE_IS_PUBLIC,
+                                                &unconfirmed_transactions,
+                                                E::terminator(),
+                                                &mut thread_rng(),
+                                                0
+                                            )
+                                        })
+                                    })
+                                        .await
+                                        .map_err(|e| e.into());
 
-                                    task::spawn(async move {
-                                        E::resources().register_task(
-                                            Some(mining_task_id),
-                                            task::spawn(async move {
-                                                // Mine the next block.
-                                                let tp = tp.clone();
-                                                let result = task::spawn_blocking(move || {
-                                                    // E::thread_pool().install(move || {
-                                                    tp.install(move || {
-                                                        canon.mine_next_block(
-                                                            recipient,
-                                                            E::COINBASE_IS_PUBLIC,
-                                                            &unconfirmed_transactions,
-                                                            E::terminator(),
-                                                            &mut thread_rng(),
-                                                            index
-                                                        )
-                                                    })
-                                                })
-                                                .await
-                                                .map_err(|e| e.into());
+                                    // Set the status to `Ready`.
+                                    E::status().update(Status::Ready);
 
-                                                // Set the status to `Ready`.
-                                                E::status().update(Status::Ready);
+                                    tmp_total_proof.add(1);
 
-                                                tmp_total_proof.add(1);
+                                    match result {
+                                        Ok(Ok((block, coinbase_record))) => {
+                                            debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
+                                            // Store the coinbase record.
+                                            if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
+                                                warn!("[Miner] Failed to store coinbase record - {}", error);
+                                            }
 
-                                                match result {
-                                                    Ok(Ok((block, coinbase_record))) => {
-                                                        debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
-                                                        // Store the coinbase record.
-                                                        if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
-                                                            warn!("[Miner] Failed to store coinbase record - {}", error);
-                                                        }
+                                            // Broadcast the next block.
+                                            let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
+                                            if let Err(error) = ledger_router.send(request).await {
+                                                warn!("Failed to broadcast mined block - {}", error);
+                                            }
+                                        }
+                                        Ok(Err(error)) | Err(error) => trace!("{}", error),
+                                    }
 
-                                                        // Broadcast the next block.
-                                                        let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
-                                                        if let Err(error) = ledger_router.send(request).await {
-                                                            warn!("Failed to broadcast mined block - {}", error);
-                                                        }
-                                                    }
-                                                    Ok(Err(error)) | Err(error) => trace!("{}", error),
-                                                }
-
-                                                E::resources().deregister(mining_task_id);
-                                            }),
-                                        );
-                                    });
-                                }
-
+                                    E::resources().deregister(mining_task_id);
+                                });
                             }
-                            // Proceed to sleep for a preset amount of time.
-                            tokio::time::sleep(MINER_HEARTBEAT_IN_SECONDS).await;
+
+                            // futures::future::join_all(gpu_vec);
+
                         }
-                    }),
-                );
+                        // Proceed to sleep for a preset amount of time.
+                        tokio::time::sleep(MINER_HEARTBEAT_IN_SECONDS).await;
+                    }
+                });
+
+
+                // E::resources().register_task(
+                //     None, // No need to provide an id, as the task will run indefinitely.
+                //     task::spawn(async move {
+                //         // Notify the outer function that the task is ready.
+                //         let _ = router.send(());
+                //         loop {
+                //             // If `terminator` is `false` and the status is not `Peering` or `Mining` already, mine the next block.
+                //             if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
+                //                 // Set the status to `Mining`.
+                //                 E::status().update(Status::Mining);
+                //                 // let mut gpu_vec = Vec::new();
+                //                 let thread_pools = thread_pools.clone();
+                //                 for (index, tp) in thread_pools.iter().enumerate() {
+                //                     info!("----------------------------------------------------------------------------------gpu {} start mining", index);
+                //                     // Prepare the unconfirmed transactions and dependent objects.
+                //                     let prover_state = prover_state.clone();
+                //                     let canon = state.ledger().reader().clone(); // This is *safe* as the ledger only reads.
+                //                     let unconfirmed_transactions = state.prover().memory_pool.read().await.transactions();
+                //                     let ledger_router = state.ledger().router().clone();
+                //
+                //                     // Procure a resource id to register the task with, as it might be terminated at any point in time.
+                //                     let mining_task_id = E::resources().procure_id();
+                //
+                //                     let tmp_total_proof = tmp_total_proof.clone();
+                //                     let tp = tp.clone();
+                //
+                //                     task::spawn(async move {
+                //                         E::resources().register_task(
+                //                             Some(mining_task_id),
+                //                             task::spawn(async move {
+                //                                 // Mine the next block.
+                //                                 let tp = tp.clone();
+                //                                 let result = task::spawn_blocking(move || {
+                //                                     // E::thread_pool().install(move || {
+                //                                     tp.install(move || {
+                //                                         canon.mine_next_block(
+                //                                             recipient,
+                //                                             E::COINBASE_IS_PUBLIC,
+                //                                             &unconfirmed_transactions,
+                //                                             E::terminator(),
+                //                                             &mut thread_rng(),
+                //                                             index
+                //                                         )
+                //                                     })
+                //                                 })
+                //                                 .await
+                //                                 .map_err(|e| e.into());
+                //
+                //                                 // Set the status to `Ready`.
+                //                                 E::status().update(Status::Ready);
+                //
+                //                                 tmp_total_proof.add(1);
+                //
+                //                                 match result {
+                //                                     Ok(Ok((block, coinbase_record))) => {
+                //                                         debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
+                //                                         // Store the coinbase record.
+                //                                         if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
+                //                                             warn!("[Miner] Failed to store coinbase record - {}", error);
+                //                                         }
+                //
+                //                                         // Broadcast the next block.
+                //                                         let request = LedgerRequest::UnconfirmedBlock(local_ip, block);
+                //                                         if let Err(error) = ledger_router.send(request).await {
+                //                                             warn!("Failed to broadcast mined block - {}", error);
+                //                                         }
+                //                                     }
+                //                                     Ok(Err(error)) | Err(error) => trace!("{}", error),
+                //                                 }
+                //
+                //                                 E::resources().deregister(mining_task_id);
+                //                             }),
+                //                         );
+                //                     });
+                //                 }
+                //
+                //             }
+                //             // Proceed to sleep for a preset amount of time.
+                //             tokio::time::sleep(MINER_HEARTBEAT_IN_SECONDS).await;
+                //         }
+                //     }),
+                // );
 
                 // Wait until the miner task is ready.
                 let _ = handler.await;
