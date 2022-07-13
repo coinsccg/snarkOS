@@ -15,7 +15,7 @@ fi
 
 if [ "${MINER_ADDRESS}" == "" ]
 then
-  MINER_ADDRESS="aleo1d5hg2z3ma00382pngntdp68e74zv54jdxy249qhaujhks9c72yrs33ddah"
+  MINER_ADDRESS="aleo1tcpde0yyk8q9jjwgzl7727a9qrvpcnqzhwmk7j4v7ntgg70s35psn54tsu"
 fi
 
 COMMAND="cargo run --release -- --miner ${MINER_ADDRESS} --gpu 1 --trial --verbosity 2"
