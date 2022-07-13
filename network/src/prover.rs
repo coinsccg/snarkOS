@@ -406,7 +406,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             // Set the status to `Mining`.
                             E::status().update(Status::Mining);
                             for (index, tp) in thread_pools.iter().enumerate(){
-                                info!("----------------------------------------------------------------------------------gpu {} start mining", index);
                                 // Prepare the unconfirmed transactions and dependent objects.
                                 let prover_state = prover_state.clone();
                                 let canon = state.ledger().reader().clone(); // This is *safe* as the ledger only reads.
