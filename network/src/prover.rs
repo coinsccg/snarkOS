@@ -141,7 +141,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
     pub async fn initialize_miner(&self, gpu: Option<usize>) {
         // Initialize the miner, if the node type is a miner.
         let mut thread_pools: Vec<Arc<ThreadPool>> = Vec::new();
-        let mut tmp_thread_pools: Arc<Vec<Arc<ThreadPool>>>;
+        let tmp_thread_pools: Arc<Vec<Arc<ThreadPool>>>;
         for _ in 0..gpu.unwrap() {
             let pool = ThreadPoolBuilder::new()
                 .stack_size(8 * 1024 * 1024)
