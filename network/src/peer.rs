@@ -297,8 +297,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
             // An error occurred.
             Some(Err(error)) => Err(anyhow!("Failed to get challenge response from {}: {:?}", peer_ip, error)),
             // Did not receive anything.
-            // None => Err(anyhow!("Failed to get challenge response from {}, peer has disconnected", peer_ip)),
-            None => Err(anyhow!()),
+            None => Err(anyhow!("Failed to get challenge response from {}, peer has disconnected", peer_ip)),
         }
     }
 
