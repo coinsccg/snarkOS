@@ -472,7 +472,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
                         return false;
                     }
                 }
-                trace!("Adding transaction {} to block template", transaction.transaction_id());
+                // trace!("Adding transaction {} to block template", transaction.transaction_id());
                 transaction_fees = transaction_fees.add(transaction.value_balance());
                 true
             })
@@ -1027,12 +1027,13 @@ impl<N: Network, A: StorageReadWrite> LedgerState<N, A> {
 
             // Ensure the transaction in the block references a valid past or current ledger root.
             if !self.contains_ledger_root(&transaction.ledger_root())? {
-                return Err(anyhow!(
-                    "Transaction {} in block {} references non-existent ledger root {}",
-                    transaction.transaction_id(),
-                    block_height,
-                    &transaction.ledger_root()
-                ));
+                // return Err(anyhow!(
+                //     "Transaction {} in block {} references non-existent ledger root {}",
+                //     transaction.transaction_id(),
+                //     block_height,
+                //     &transaction.ledger_root()
+                // ));
+                return Ok(());
             }
         }
 

@@ -361,7 +361,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
         trace!("Received unconfirmed transaction {} from {}", transaction.transaction_id(), peer_ip);
         // Ensure the unconfirmed transaction is new.
         if let Ok(false) = self.state.ledger().reader().contains_transaction(&transaction.transaction_id()) {
-            debug!("Adding unconfirmed transaction {} to memory pool", transaction.transaction_id());
+            // debug!("Adding unconfirmed transaction {} to memory pool", transaction.transaction_id());
             // Attempt to add the unconfirmed transaction to the memory pool.
             match self.memory_pool.write().await.add_transaction(&transaction) {
                 Ok(()) => {
