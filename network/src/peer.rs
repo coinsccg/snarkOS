@@ -257,7 +257,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                         (peer_nonce, node_type, peer_status)
                     }
                     Message::Disconnect(reason) => {
-                        bail!("Peer {} disconnected for the following reason: {:?}", peer_ip, reason);
+                        // bail!("Peer {} disconnected for the following reason: {:?}", peer_ip, reason);
                     }
                     message => {
                         bail!("Expected challenge request, received '{}' from {}", message.name(), peer_ip);
@@ -285,7 +285,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                         }
                     }
                     Message::Disconnect(reason) => {
-                        bail!("Peer {} disconnected for the following reason: {:?}", peer_ip, reason);
+                        // bail!("Peer {} disconnected for the following reason: {:?}", peer_ip, reason);
                     }
                     message => Err(anyhow!(
                         "Expected challenge response, received '{}' from {}",
@@ -295,9 +295,9 @@ impl<N: Network, E: Environment> Peer<N, E> {
                 }
             }
             // An error occurred.
-            Some(Err(error)) => Err(anyhow!("Failed to get challenge response from {}: {:?}", peer_ip, error)),
+            Some(Err(error)) => Err(anyhow!("")),
             // Did not receive anything.
-            None => Err(anyhow!("Failed to get challenge response from {}, peer has disconnected", peer_ip)),
+            None => Err(anyhow!("")),
         }
     }
 
@@ -527,7 +527,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                                     #[cfg(any(feature = "test", feature = "prometheus"))]
                                     metrics::increment_counter!(metrics::message_counts::DISCONNECT);
 
-                                    debug!("Peer {} disconnected for the following reason: {:?}", peer_ip, reason);
+                                    // debug!("Peer {} disconnected for the following reason: {:?}", peer_ip, reason);
                                     break;
                                 },
                                 Message::PeerRequest => {
