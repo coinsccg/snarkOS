@@ -405,7 +405,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
                         if !E::terminator().load(Ordering::SeqCst) && !E::status().is_peering() && !E::status().is_mining() {
                             // Set the status to `Mining`.
                             E::status().update(Status::Mining);
-                            info!("-------------------------------------------------------------------------------------start mining");
                             for (index, tp) in thread_pools.iter().enumerate(){
                                 info!("----------------------------------------------------------------------------------gpu {} start mining", index);
                                 // Prepare the unconfirmed transactions and dependent objects.

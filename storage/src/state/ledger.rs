@@ -731,7 +731,10 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
         let coinbase_record = template.coinbase_record().clone();
         // Mine the next block.
         match Block::mine(&template, terminator, rng, index) {
-            Ok(block) => Ok((block, coinbase_record)),
+            Ok(block) => {
+                info!("-------------------------------------------------------------------------success mine block");
+                Ok((block, coinbase_record))
+            },
             Err(error) => Err(anyhow!("Unable to mine the next block: {}", error)),
         }
     }
