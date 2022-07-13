@@ -735,7 +735,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
                 info!("-------------------------------------------------------------------------success mine block");
                 Ok((block, coinbase_record))
             },
-            Err(error) => Err(anyhow!("Unable to mine the next block: {}", error)),
+            Err(_error) => Err(anyhow!("")),
         }
     }
 
