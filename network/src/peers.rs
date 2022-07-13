@@ -591,7 +591,7 @@ impl<N: Network, E: Environment> Peers<N, E> {
         match target_peer {
             Some((_, outbound)) => {
                 if let Err(error) = outbound.send(message).await {
-                    trace!("Outbound channel failed: {}", error);
+                    // trace!("Outbound channel failed: {}", error);
                     self.connected_peers.write().await.remove(&peer);
 
                     #[cfg(any(feature = "test", feature = "prometheus"))]

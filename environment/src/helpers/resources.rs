@@ -116,7 +116,7 @@ impl Resources {
                                 resource.abort().await;
                             });
                         } else {
-                            error!("Resource with id {} was not found", id);
+                            // error!("Resource with id {} was not found", id);
                         }
                     }
                     ResourceRequest::Shutdown => break,
