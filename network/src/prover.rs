@@ -94,7 +94,7 @@ impl TotalProof {
     }
 
     pub fn add(&self, n: u32) {
-        self.total_proof.clone().fetch_add(n, Ordering::SeqCst);
+        self.total_proof.fetch_add(n, Ordering::SeqCst);
     }
 
     pub async fn hash_rate(&self){
@@ -141,16 +141,16 @@ impl<N: Network, E: Environment> Prover<N, E> {
     pub async fn initialize_miner(&self, gpu: Option<usize>) {
         // Initialize the miner, if the node type is a miner.
         let mut thread_pools: Vec<Arc<ThreadPool>> = Vec::new();
-        let tmp_thread_pools: Arc<Vec<Arc<ThreadPool>>>;
+
         for _ in 0..gpu.unwrap() {
             let pool = ThreadPoolBuilder::new()
                 .stack_size(8 * 1024 * 1024)
-                .num_threads(4)
+                .num_threads(2)
                 .build()
                 .expect("failed create thread pool");
             thread_pools.push(Arc::new(pool));
         }
-        tmp_thread_pools = Arc::new(thread_pools);
+        let tmp_thread_pools: Arc<Vec<Arc<ThreadPool>>> = Arc::new(thread_pools);
         if E::NODE_TYPE == NodeType::Miner && self.pool.is_none() {
             self.state.prover().start_miner(tmp_thread_pools).await;
         }

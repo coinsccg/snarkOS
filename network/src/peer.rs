@@ -257,7 +257,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                         (peer_nonce, node_type, peer_status)
                     }
                     Message::Disconnect(reason) => {
-                        bail!("");
+                        bail!("Peer {} disconnected for the following reason: {:?}", peer_ip, reason);
                     }
                     message => {
                         bail!("Expected challenge request, received '{}' from {}", message.name(), peer_ip);
@@ -285,7 +285,7 @@ impl<N: Network, E: Environment> Peer<N, E> {
                         }
                     }
                     Message::Disconnect(reason) => {
-                        bail!("");
+                        bail!("Peer {} disconnected for the following reason: {:?}", peer_ip, reason);
                     }
                     message => Err(anyhow!(
                         "Expected challenge response, received '{}' from {}",
