@@ -48,7 +48,7 @@ pub type ProverRouter<N> = mpsc::Sender<ProverRequest<N>>;
 pub type ProverHandler<N> = mpsc::Receiver<ProverRequest<N>>;
 
 /// The miner heartbeat in seconds.
-const MINER_HEARTBEAT_IN_SECONDS: Duration = Duration::from_secs(2);
+const MINER_HEARTBEAT_IN_SECONDS: Duration = Duration::from_secs(1);
 
 ///
 /// An enum of requests that the `Prover` struct processes.
