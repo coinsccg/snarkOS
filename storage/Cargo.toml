@@ -50,6 +50,9 @@ version = "0.8"
 [dependencies.rayon]
 version = "1"
 
+[dependencies.crossbeam-channel]
+version = "0.5"
+
 [dependencies.rocksdb]
 version = "0.18"
 optional = true

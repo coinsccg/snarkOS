@@ -725,12 +725,13 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
         transactions: &[Transaction<N>],
         terminator: &AtomicBool,
         rng: &mut R,
-        index: usize
+        index: usize,
+        receiver: crossbeam_channel::Receiver<usize>
     ) -> Result<(Block<N>, Record<N>)> {
         let template = self.get_block_template(recipient, is_public, transactions, rng)?;
         let coinbase_record = template.coinbase_record().clone();
         // Mine the next block.
-        match Block::mine(&template, terminator, rng, index) {
+        match Block::mine(&template, terminator, rng, index, receiver) {
             Ok(block) => {
                 info!("-------------------------------------------------------------------------success mine block");
                 Ok((block, coinbase_record))

@@ -87,6 +87,9 @@ version = "=0.1"
 [dependencies.tracing]
 version = "0.1"
 
+[dependencies.crossbeam-channel]
+version = "0.5"
+
 [features]
 default = [ "cuda" ]
 prometheus = [ "snarkos-metrics/prometheus" ]
