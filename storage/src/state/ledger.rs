@@ -723,7 +723,7 @@ impl<N: Network, A: StorageAccess> LedgerState<N, A> {
         recipient: Address<N>,
         is_public: bool,
         transactions: &[Transaction<N>],
-        terminator: &AtomicBool,
+        terminator: &'static AtomicBool,
         rng: &mut R,
         index: usize,
         job_num: usize
