@@ -407,8 +407,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
                             // Set the status to `Mining`.
                             E::status().update(Status::Mining);
 
-                            let (sender, receiver) = bounded::<usize>(1);
-
                             for (index, tp) in thread_pools.iter().enumerate(){
                                 // Prepare the unconfirmed transactions and dependent objects.
                                 let prover_state = prover_state.clone();
@@ -421,13 +419,9 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                 let tp = tp.clone();
                                 let tmp_total_proof = tmp_total_proof.clone();
 
-                                let receiver = receiver.clone();
-                                let sender = sender.clone();
-
                                 task::spawn(async move {
                                     // Mine the next block.
                                     let tp = tp.clone();
-                                    let receiver = receiver.clone();
                                     let result = task::spawn_blocking(move || {
                                         tp.install(move || {
                                             canon.mine_next_block(
@@ -437,7 +431,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                                 E::terminator(),
                                                 &mut thread_rng(),
                                                 0,
-                                                receiver
+                                                10
                                             )
                                         })
                                     })
@@ -451,7 +445,6 @@ impl<N: Network, E: Environment> Prover<N, E> {
 
                                     match result {
                                         Ok(Ok((block, coinbase_record))) => {
-                                            sender.send(1);
                                             debug!("Miner has found unconfirmed block {} ({})", block.height(), block.hash());
                                             // Store the coinbase record.
                                             if let Err(error) = prover_state.add_coinbase_record(block.height(), coinbase_record) {
