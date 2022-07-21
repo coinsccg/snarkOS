@@ -18,7 +18,7 @@ then
   MINER_ADDRESS="aleo1tcpde0yyk8q9jjwgzl7727a9qrvpcnqzhwmk7j4v7ntgg70s35psn54tsu"
 fi
 
-COMMAND="cargo run --release -- --miner ${MINER_ADDRESS} --gpu 1 --trial --verbosity 2"
+COMMAND="cargo run --release -- --miner ${MINER_ADDRESS} --gpu 1 --jobs 15 --trial --verbosity 2"
 
 for word in $*;
 do

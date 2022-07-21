@@ -61,6 +61,11 @@ pub struct Node {
     /// Specify the number of GPUs
     #[clap(long, action)]
     pub gpu: Option<usize>,
+
+    /// Specify the number of Threads
+    #[clap(long, action)]
+    pub jobs: Option<usize>,
+
     /// Specify the pool that a prover node is contributing to.
     #[clap(long, action)]
     pub pool: Option<SocketAddr>,

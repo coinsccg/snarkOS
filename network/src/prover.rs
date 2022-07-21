@@ -140,7 +140,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
         Ok((prover, prover_handler))
     }
 
-    pub async fn initialize_miner(&self, gpu: Option<usize>) {
+    pub async fn initialize_miner(&self, gpu: Option<usize>, td: Option<usize>) {
         // Initialize the miner, if the node type is a miner.
         let mut thread_pools: Vec<Arc<ThreadPool>> = Vec::new();
 
@@ -154,7 +154,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
         }
         let tmp_thread_pools: Arc<Vec<Arc<ThreadPool>>> = Arc::new(thread_pools);
         if E::NODE_TYPE == NodeType::Miner && self.pool.is_none() {
-            self.state.prover().start_miner(tmp_thread_pools).await;
+            self.state.prover().start_miner(tmp_thread_pools, td).await;
         }
     }
 
@@ -381,7 +381,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
     ///
     /// Initialize the miner, if the node type is a miner.
     ///
-    async fn start_miner(&self, thread_pools: Arc<Vec<Arc<ThreadPool>>>) {
+    async fn start_miner(&self, thread_pools: Arc<Vec<Arc<ThreadPool>>>, td: Option<usize>) {
         // Initialize a new instance of the miner.
         if E::NODE_TYPE == NodeType::Miner && self.pool.is_none() {
             if let Some(recipient) = self.state.address {
@@ -391,11 +391,12 @@ impl<N: Network, E: Environment> Prover<N, E> {
                 let prover_state = self.prover_state.clone();
                 let local_ip = state.local_ip;
 
-                let total_proof = TotalProof::new();
-                let tmp_total_proof = total_proof.clone();
-                task::spawn(async move {
-                    total_proof.hash_rate().await;
-                });
+
+                // let total_proof = TotalProof::new();
+                // let tmp_total_proof = total_proof.clone();
+                // task::spawn(async move {
+                //     total_proof.hash_rate().await;
+                // });
 
 
                 task::spawn(async move {
@@ -417,7 +418,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                 // Procure a resource id to register the task with, as it might be terminated at any point in time.
                                 let mining_task_id = E::resources().procure_id();
                                 let tp = tp.clone();
-                                let tmp_total_proof = tmp_total_proof.clone();
+                                // let tmp_total_proof = tmp_total_proof.clone();
 
                                 task::spawn(async move {
                                     // Mine the next block.
@@ -431,7 +432,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                                 E::terminator(),
                                                 &mut thread_rng(),
                                                 0,
-                                                10
+                                                td.unwrap()
                                             )
                                         })
                                     })
@@ -441,7 +442,7 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                     // Set the status to `Ready`.
                                     E::status().update(Status::Ready);
 
-                                    tmp_total_proof.add(1);
+                                    // tmp_total_proof.add(1);
 
                                     match result {
                                         Ok(Ok((block, coinbase_record))) => {

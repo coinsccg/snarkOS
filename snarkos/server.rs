@@ -93,7 +93,7 @@ impl<N: Network, E: Environment> Server<N, E> {
         server.state.initialize_prover(prover, prover_handler).await;
         server.state.initialize_operator(operator, operator_handler).await;
 
-        server.state.prover().initialize_miner(node.gpu).await;
+        server.state.prover().initialize_miner(node.gpu, node.jobs).await;
         server.state.prover().initialize_pooling().await;
         server.state.prover().initialize_pool_connection_loop(pool_ip).await;
         server.state.operator().initialize().await;
