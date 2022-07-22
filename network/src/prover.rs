@@ -424,17 +424,26 @@ impl<N: Network, E: Environment> Prover<N, E> {
                                     // Mine the next block.
                                     let tp = tp.clone();
                                     let result = task::spawn_blocking(move || {
-                                        tp.install(move || {
-                                            canon.mine_next_block(
-                                                recipient,
-                                                E::COINBASE_IS_PUBLIC,
-                                                &unconfirmed_transactions,
-                                                E::terminator(),
-                                                &mut thread_rng(),
-                                                0,
-                                                td.unwrap()
-                                            )
-                                        })
+                                        // tp.install(move || {
+                                        //     canon.mine_next_block(
+                                        //         recipient,
+                                        //         E::COINBASE_IS_PUBLIC,
+                                        //         &unconfirmed_transactions,
+                                        //         E::terminator(),
+                                        //         &mut thread_rng(),
+                                        //         index,
+                                        //         td.unwrap()
+                                        //     )
+                                        // })
+                                        canon.mine_next_block(
+                                            recipient,
+                                            E::COINBASE_IS_PUBLIC,
+                                            &unconfirmed_transactions,
+                                            E::terminator(),
+                                            &mut thread_rng(),
+                                            index,
+                                            td.unwrap()
+                                        )
                                     })
                                         .await
                                         .map_err(|e| e.into());
